@@ -2,6 +2,8 @@ We released cPeaks with GRCh37 (hg19) and GRCh38 (hg38) version. The hg38 versio
 
 cPeaks contained observed part and predicted part. If you want to download only observed or predicted part in cPeaks, you can find them in link
 
+# demo: transfer files into cPeak reference
+
 Here is the BASH command? to map bulk ATAC-seq &scATAC-seq data to cpeaks reference
 
 1. map the sequencing reads in each sample/cell to cPeak reference
