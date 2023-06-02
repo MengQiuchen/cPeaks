@@ -30,12 +30,8 @@ usage: python main.py [--fragment_path your_fragment.tsv.gz]
 optional arguments:
  -h, --help            show this help message and exit
  --fragment_path, -f: the input file is fragment.gz file, transfer fragment to cPeak reference
- 
  --barcode_path, -b: if you give the barcode file, the code will use the barcode in the file; if you don't give the barcode file, the code will use all barcode in the fragment.gz file
- 
-
---reference： cPeak version, hg38 or hg19, default is hg38.
-
+ --reference： cPeak version, hg38 or hg19, default is hg38.
 
 ```
 
