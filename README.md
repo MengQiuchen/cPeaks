@@ -45,7 +45,7 @@ note: The observed part only use observed data as reference, the predicted part 
 **This is not a good idea.** It may lose the open regions in the genomic regions which are not included in pre-identfied features.If the input is bulk ATAC-seq data, the quantification of each cPeaks is unbelievable.
 
 ```
-usage: python main.py [-bed your.bed]
+usage: python main.py [--bed_path your.bed]
 
 --bed_path, -bed: the input peak.bed file
 ```
