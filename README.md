@@ -3,10 +3,11 @@ We released cPeaks with GRCh37 (hg19) and GRCh38 (hg38) version. The hg38 versio
 cPeaks contained observed part and predicted part. If you want to download only observed or predicted part in cPeaks, you can find them in link
 
 
-# Tutorial: transfer files into cPeak reference
+## Tutorial: transfer files into cPeak reference
 
-### 0. requirments.txt
+### 0. requirments
 
+```
 anndata
 
 scanpy
@@ -16,19 +17,35 @@ numpy
 tqdm
 
 joblib
+```
 
 ### 1. map the sequencing reads in each sample/cell to cPeak reference
  
-example command: python main.py -f test_fragment.tsv.gz -b test_bar.txt -o result
+```
+
+usage: python main.py [--fragment_path your_fragment.tsv.gz]
+                      [--barcode_path your_bar.txt]
+                      [--output your_output_folder]
+
+optional arguments:
+ -h, --help            show this help message and exit
+ --fragment_path, -f: the input file is fragment.gz file, transfer fragment to cPeak reference
+ 
+ --barcode_path, -b: if you give the barcode file, the code will use the barcode in the file; if you don't give the barcode file, the code will use all barcode in the fragment.gz file
+ 
+
+--reference： cPeak version, hg38 or hg19, default is hg38.
+
+
+```
 
 
 
 parameters:
---fragment_path(must-have): '-f', the input file is fragment.gz file, which is the output of fragment file in the 10x pipeline
 
---barcode_path(optional): '-b', if you give the barcode file, the code will use the barcode in the file; if you don't give the barcode file, the code will use all barcode in the fragment.gz file
 
---reference（optional)： hg38/hg19, default is hg38. unavailable
+
+
 
 --version：all(default), "observed" only use observed part as reference, "predicted" only use predicted part as reference. unavailable
 
