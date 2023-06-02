@@ -8,9 +8,13 @@ cPeaks contained observed part and predicted part. If you want to download only 
 ### 0. requirments.txt
 
 anndata
+
 scanpy
+
 numpy
+
 tqdm
+
 joblib
 
 ### 1. map the sequencing reads in each sample/cell to cPeak reference
