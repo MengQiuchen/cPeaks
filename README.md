@@ -22,7 +22,6 @@ joblib
 ### 1. map the sequencing reads in each sample/cell to cPeak reference
  
 ```
-
 usage: python main.py [--fragment_path your_fragment.tsv.gz]
                       [--barcode_path your_bar.txt]
                       [--output your_output_folder]
