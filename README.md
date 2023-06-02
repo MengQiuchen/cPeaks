@@ -28,9 +28,9 @@ parameters:
 
 --barcode_path(optional): '-b', if you give the barcode file, the code will use the barcode in the file; if you don't give the barcode file, the code will use all barcode in the fragment.gz file
 
---reference（optional)： hg38/hg19, default is hg38. unavailable
+--reference（optional)： "hg38" (default) or "hg19". (unavailable now)
 
---version：all(default), "observed" only use observed part as reference, "predicted" only use predicted part as reference. unavailable
+--version：all(default), "observed" only use observed part as reference, "predicted" only use predicted part as reference. (unavailable now)
 
 --output(default:./res): if you do note give the output(default: ./res)
 
@@ -47,10 +47,3 @@ command:
 --bed_path: '-bed', the input file is peak.bed file
 
 example command: python main.py -bed test.bed
-
-
-
-
-
-
-
