@@ -2,12 +2,22 @@ We released cPeaks with GRCh37 (hg19) and GRCh38 (hg38) version. The hg38 versio
 
 cPeaks contained observed part and predicted part. If you want to download only observed or predicted part in cPeaks, you can find them in link
 
-# demo: transfer files into cPeak reference
 
-Here is the BASH command? to map bulk ATAC-seq &scATAC-seq data to cpeaks reference
+# Tutorial: transfer files into cPeak reference
 
-1. map the sequencing reads in each sample/cell to cPeak reference
-command: xxxx --xxx ---xx --input_type auto/fragment/bam
+### 0. requirments.txt
+
+anndata
+scanpy
+numpy
+tqdm
+joblib
+
+### 1. map the sequencing reads in each sample/cell to cPeak reference
+ 
+example command: python main.py -f test_fragment.tsv.gz -b test_bar.txt -o result
+
+
 
 parameters:
 --fragment_path(must-have): '-f', the input file is fragment.gz file, which is the output of fragment file in the 10x pipeline
@@ -23,8 +33,6 @@ parameters:
 --type_saved(default:NULL): for bulk ATAC-seq, the type saved is .bed. for single-cell, the default output file is "mtx" file for single-cell, or you can assign the "type_saved" to "h5ad" former
 
 --input_type:auto:auto detection (default); fragments: xxxx, bam: unavailable bed: unavailable
-
-example command: python main.py -f test_fragment.tsv.gz -b test_bar.txt -o result
 
 
 2. directly map the pre-identified features like peaks to cPeaks (not recommand)
