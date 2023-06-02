@@ -9,13 +9,9 @@ cPeaks contained observed part and predicted part. If you want to download only 
 
 ```
 anndata
-
 scanpy
-
 numpy
-
 tqdm
-
 joblib
 ```
 
