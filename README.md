@@ -7,7 +7,7 @@ cPeaks contained observed part and predicted part. If you want to download only 
  Here is the BASH command? to map bulk ATAC-seq &scATAC-seq data to cpeaks reference
 
 1. map the sequencing reads in each sample/cell to cPeak reference
-# command: xxxx --xxx ---xx --input_type auto/fragment/bam
+
 
 # parameters:
  --fragment_path(must-have): '-f', the input file is fragment.gz file, which is the output of fragment file in the 10x pipeline
