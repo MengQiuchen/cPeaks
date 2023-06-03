@@ -2,7 +2,7 @@ We released cPeaks with [GRCh37/hg19](https://github.com/MengQiuchen/cPeaks/blob
 
 ## Citation
 
-Meng Q, Wu X, Li C, et al. Consensus peaks of chromatin accessibility in the human genome. doi:10.1101/2023.05.30.542889
+Meng Q, Wu X, Li C, et al. Consensus peaks of chromatin accessibility in the human genome. [doi:10.1101/2023.05.30.542889](https://doi.org/10.1101/2023.05.30.542889)
 
 
 ## Introduction
