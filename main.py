@@ -220,7 +220,7 @@ if __name__ == "__main__":
 
     fragment_path = args.fragment_path
     barcode_path = args.barcode_path
-    savepath = args.savepath
+    savepath = args.output
     save_type = args.type_saved
     num_cores = args.num_cores
     bed_path = args.bed_path
