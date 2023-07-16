@@ -1,6 +1,6 @@
 # python 
-# 2023/06/01
-# version 1.0
+# 2023/07/15
+# version 1.1
 # @auther : Xinze Wu
 
 import os
@@ -59,7 +59,7 @@ def frag2mtx(fragment_path,savepath,barcode_path,num_cores):
     savepath: path to save mtx file
     barcode_path: path of barcode file, ,txt format,each line is a barcode; if None, use all barcode in fragment.gz file
     '''
-
+    fragment_name = fragment_path.split('/')[-1]
     # read fragment.gz file by open
     fragment_data = gzip.open(fragment_path, 'rb')
     
@@ -81,8 +81,11 @@ def frag2mtx(fragment_path,savepath,barcode_path,num_cores):
 
     else:
         barcodes = set(open(barcode_path, 'r').readlines())
+        barcodes = [i.strip() for i in barcodes]
         print('num of barcode is {}'.format(len(barcodes)))
+        
     barcodes = list(barcodes)
+    print(barcodes[:10])
     # predict the time needed for trans
 
     # get the bed in each barcode
@@ -100,9 +103,9 @@ def frag2mtx(fragment_path,savepath,barcode_path,num_cores):
             bar2bed[temp[3]].append((temp[0],int(temp[1]),int(temp[2])))
         except:
             continue
-    print('num peak of random bar',len(bar2bed[barcodes[-1]]))
-    print('num peak of random bar',len(bar2bed[barcodes[-2]]))
-    print('num peak of random bar',len(bar2bed[barcodes[-3]]))
+    print('num peak of random bar: ',len(bar2bed[barcodes[-1]]))
+    print('num peak of random bar: ',len(bar2bed[barcodes[-2]]))
+    print('num peak of random bar: ',len(bar2bed[barcodes[-3]]))
 
 
     print('mapping to cPeaks...')
@@ -115,8 +118,10 @@ def frag2mtx(fragment_path,savepath,barcode_path,num_cores):
     for res in results:
         value_num += len(res[0])
     
+    print('the num of the value of mtx is: ',value_num)
+    
     print('start to write mtx file')
-    with open(os.path.join(savepath,fragment_path+'.mtx'), 'w') as f:
+    with open(os.path.join(savepath,fragment_name+'.mtx'), 'w') as f:
         f.write('%%MatrixMarket matrix coordinate real general\n')
         f.write(f'{len(b_peaks)} {len(barcodes)} {value_num}\n')
         
@@ -249,7 +254,6 @@ if __name__ == "__main__":
     if bed_path is not None:
         print('attention: you use bed file you called before')
         map_bed_to_bed(bed_path, b_peaks,os.path.join(savepath,'res.bed'))
-        # 退出
         sys.exit(0)
 
 
