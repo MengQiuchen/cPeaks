@@ -1,14 +1,23 @@
-We released cPeaks with [GRCh37/hg19](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg19.bed) and [GRCh38/hg38](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg38.bed) version.
+## Introduction
+
+Chromatin accessibility profiling methods such as assay for transposase-accessible chromatin using sequencing (ATAC-seq) have been promoting the identification of gene regulatory elements and the characterization of epigenetic landscapes. Unlike gene expression data, there is no consistent reference for chromatin accessibility data, which hinders large-scale integration analysis. By analyzing many more than 1000 ATAC-seq samples and 100 scATAC-seq samples, we found that cells share the same set of potential open regions. We thus proposed a reference called consensus peaks (cPeaks) to represent open regions across different cell types, and developed a deep-learning model to predict all potential open regions in the human genome. We showed that cPeaks can be regarded as a new set of epigenomic elements in the human genome, and using cPeaks can increase the performance of cell annotations and facilitate the discovery of rare cell types. cPeaks also performed well in analyzing dynamic biological processes and diseases. cPeaks can serve as a general reference for epigenetic studies, much like the reference genome for genomic studies, making the research faster, more accurate, and more scalable.
 
 ## Citation
 
 Meng Q, Wu X, Li C, et al. The full set of potential open regions (PORs) in the human genome defined by consensus peaks of ATAC-seq data. [doi:10.1101/2023.05.30.542889](https://doi.org/10.1101/2023.05.30.542889)
 
+## cPeaks
 
-## Introduction
+We released cPeaks (.bed format) with [GRCh37/hg19](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg19.bed) and [GRCh38/hg38](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg38.bed) version.
 
-Chromatin accessibility profiling methods such as assay for transposase-accessible chromatin using sequencing (ATAC-seq) have been promoting the identification of gene regulatory elements and the characterization of epigenetic landscapes. Unlike gene expression data, there is no consistent reference for chromatin accessibility data, which hinders large-scale integration analysis. By analyzing many more than 1000 ATAC-seq samples and 100 scATAC-seq samples, we found that cells share the same set of potential open regions. We thus proposed a reference called consensus peaks (cPeaks) to represent open regions across different cell types, and developed a deep-learning model to predict all potential open regions in the human genome. We showed that cPeaks can be regarded as a new set of epigenomic elements in the human genome, and using cPeaks can increase the performance of cell annotations and facilitate the discovery of rare cell types. cPeaks also performed well in analyzing dynamic biological processes and diseases. cPeaks can serve as a general reference for epigenetic studies, much like the reference genome for genomic studies, making the research faster, more accurate, and more scalable.
-
+The basic information and properties of cPeaks can be found in cPeaks_info.tsv [https://cloud.tsinghua.edu.cn/f/8fa73ab35ec049cf8358/]
+- ID: The ID of this cPeak. We employed a 14-character string as the unique ID for each cPeak. cPeak ID begins with POR for potential open regions, then HS for humans, and ends with a nine-digital number. For example, the first cPeak was encoded as PORHS000000001.
+- chr: The chromosome of this cPeak.
+- source: The source of this cPeak, “observed” or “predicted”.
+- start & end: start and end positions of this cPeak.
+- housekeeping: the housekeeping status, "true" or "false".
+- shapePattern: the shape pattern, "well-positioned", "one-side", "weakly-positioned" or "else".
+- inferredElements: the inferred regulatory elements, "TSS", "Promoter", "Enhancer", "CTCF" or "TES". A cPeak may act as multiple inferred regulatory elements, which were split by ",". 
 
 ## Map sequencing reads (BAM/fragments.tsv/.bed) to cPeaks
 
