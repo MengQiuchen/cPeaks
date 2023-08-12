@@ -10,7 +10,7 @@ Meng Q, Wu X, Li C, et al. The full set of potential open regions (PORs) in the 
 
 We released cPeaks (.bed format) with [GRCh37/hg19](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg19.bed) and [GRCh38/hg38](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg38.bed) version.
 
-The basic information and properties of cPeaks can be found in [cPeaks_info.tsv](https://cloud.tsinghua.edu.cn/f/8fa73ab35ec049cf8358/).
+The basic information and properties of cPeaks can be found in [cPeaks_info.tsv](https://cloud.tsinghua.edu.cn/f/4422592d373948589dc4/).
 - ID: The ID of this cPeak. We employed a 14-character string as the unique ID for each cPeak. cPeak ID begins with POR for potential open regions, then HS for humans, and ends with a nine-digital number. For example, the first cPeak was encoded as PORHS000000001.
 - chr: The chromosome of this cPeak.
 - source: The source of this cPeak, “observed” or “predicted”.
