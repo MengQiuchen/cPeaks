@@ -55,10 +55,12 @@ python main.py --fragment_path path/to/your_fragment.tsv.gz
  
 optional arguments:
 
- --help,-h:           show this help message
+ --help, -h:          show this help message
  --barcode_path, -b:  barcode file is given, the code will use the barcode in the file or the code will use all barcodes in the fragment.tsv.gz file
- --type_saved，-t:    output file is mtx file or h5ad former, Default to .mtx
- --output, -o:        output folder, Default to ./result
+ --type_saved, -t:    output file is mtx file or h5ad former, Default to .mtx
+ --output, -o:        output folder, Default to ./map2cpeaks_result
+ --output_name:       name of output files, Default to cell-cpeaks.
+ --num_cores, -n:     number of cores to use, Default to 10.
  --reference:         cPeak version, hg38 or hg19, Default to hg38.
 ```
 
