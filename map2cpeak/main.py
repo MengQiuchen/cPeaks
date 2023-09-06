@@ -1,5 +1,5 @@
 # python 
-# 2023-09-05
+# 2023-09-06
 # version 2.0
 # @auther : Xinze Wus
 
@@ -16,38 +16,6 @@ from scipy.io import mmread
 from collections import Counter,OrderedDict
 
 
-
-# map a bed to b bed, the output is a tuple of two numpy arrays: (indices, values)
-def map_A_to_B(a_peaks):
-    
-    a_dict = {}
-    for chrom in chr_list:
-        a_dict[chrom] = []
-    
-    for peak in a_peaks:
-        chrom = peak[0]
-        start = peak[1]
-        end = peak[2]
-        if chrom in a_dict:
-            a_dict[chrom].append((start, end))
-    
-    overlap_counts = np.zeros(len(b_peaks), dtype=int)
-    for i, peak in enumerate(b_peaks):
-        chrom = peak[0]
-        start = peak[1]
-        end = peak[2]
-        if chrom not in a_dict:
-            continue
-        
-        for a_peak in a_dict[chrom]:
-            if a_peak[0] < end and start < a_peak[1]:
-                overlap_counts[i] += 1
-          
-    non_zero_indices = np.nonzero(overlap_counts)[0]
-    non_zero_values = overlap_counts[non_zero_indices]
-    
-    return (non_zero_indices+1, non_zero_values)
-
 # def function to trans fragment file to cpeaks referenced mtx
 def frag2mtx(fragment_path,savepath,barcode_path):
     '''
@@ -58,7 +26,9 @@ def frag2mtx(fragment_path,savepath,barcode_path):
     bar2idx = OrderedDict()
     
     if barcode_path == None:
-        
+
+
+        # 打开压缩文件并且逐行读取
         with gzip.open(fragment_path, 'rt') as file:
             for line in tqdm(file):
                 tmp = line.strip().split('\t')
@@ -138,10 +108,9 @@ def frag2mtx(fragment_path,savepath,barcode_path):
 
 
 # mtx, cpeaks, barcode to h5ad
-def mtx2h5ad(mtx_path, cpeaks_path, savepath):
+def mtx2h5ad(mtx_path, savepath):
     '''
     mtx_path: path of mtx file
-    cpeaks_path: path of cpeaks file
     savepath: path to save h5ad file
     '''
     print('read mtx')
@@ -160,6 +129,7 @@ def mtx2h5ad(mtx_path, cpeaks_path, savepath):
     print('write to h5ad done!')
 
 # map bed to bed 
+
 def map_bed_to_bed(a_bed_path, b_peaks,savepath):
 
     """
@@ -171,7 +141,6 @@ def map_bed_to_bed(a_bed_path, b_peaks,savepath):
     a_peaks = open(a_bed_path, 'r').readlines()
     a_peaks = [i.strip().split('\t') for i in a_peaks]
 
-    
     a_dict = {}
     for chrom in chr_list:
         a_dict[chrom] = []
@@ -275,14 +244,16 @@ if __name__ == "__main__":
         map_bed_to_bed(bed_path, b_peaks,os.path.join(savepath,'res.bed'))
         print("finished!")
         sys.exit(0)
-
     
     if save_type == 'mtx':
         frag2mtx(fragment_path,savepath,barcode_path)
-    else:
+    elif save_type == 'h5ad':
         
-        frag2mtx(fragment_path,savepath,barcode_path,num_cores)
-        mtx2h5ad(os.path.join(savepath,output_name+'.mtx'), cpeaks_path, savepath)
+        frag2mtx(fragment_path,savepath,barcode_path)
+        mtx2h5ad(os.path.join(savepath,output_name+'.mtx'), savepath)
+    else:
+        raise('--type_saved (-t) must be mtx or h5ad')
+        
 
     print('use time: ',round(time()-time_),"s")
     
