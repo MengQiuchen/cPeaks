@@ -288,5 +288,5 @@ if __name__ == "__main__":
         frag2mtx(fragment_path,savepath,barcode_path,num_cores)
         mtx2h5ad(os.path.join(savepath,output_name+'.mtx'), cpeaks_path, savepath)
 
-    print('use time: ',time()-time_)
+    print('use time: ',round(time()-time_),"s")
     
