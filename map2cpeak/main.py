@@ -20,7 +20,6 @@ from collections import Counter,OrderedDict
 # map a bed to b bed, the output is a tuple of two numpy arrays: (indices, values)
 def map_A_to_B(a_peaks):
     
-    
     a_dict = {}
     for chrom in chr_list:
         a_dict[chrom] = []
@@ -49,7 +48,6 @@ def map_A_to_B(a_peaks):
     
     return (non_zero_indices+1, non_zero_values)
 
-
 # def function to trans fragment file to cpeaks referenced mtx
 def frag2mtx(fragment_path,savepath,barcode_path):
     '''
@@ -60,9 +58,7 @@ def frag2mtx(fragment_path,savepath,barcode_path):
     bar2idx = OrderedDict()
     
     if barcode_path == None:
-
-
-        # 打开压缩文件并且逐行读取
+        
         with gzip.open(fragment_path, 'rt') as file:
             for line in tqdm(file):
                 tmp = line.strip().split('\t')
