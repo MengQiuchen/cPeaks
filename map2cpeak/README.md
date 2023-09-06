@@ -35,7 +35,7 @@ python main.py --fragment_path path/to/your_fragment.tsv.gz
 optional arguments:
 
  --help, -h:          show this help message
- --barcode_path, -b:  barcode file is given, the code will use the barcode in the file or the code will use all barcodes in the fragment.tsv.gz file
+ --barcode_path, -b:  Each line is a barcode, the code will use the barcodes in the file, Default to all barcodes in fragment
  --type_saved, -t:    output file is mtx file or h5ad former, Default to .mtx
  --output, -o:        output folder, Default to ./map2cpeaks_result
  --output_name:       name of output files, Default to cell-cpeaks.
