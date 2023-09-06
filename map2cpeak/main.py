@@ -1,5 +1,5 @@
 # python 
-# 2023-09-06
+# 2023-09-07
 # version 2.0
 # @auther : Xinze Wus
 
@@ -250,7 +250,12 @@ if __name__ == "__main__":
     elif save_type == 'h5ad':
         
         frag2mtx(fragment_path,savepath,barcode_path)
-        mtx2h5ad(os.path.join(savepath,output_name+'.mtx'), savepath)
+        if barcode_path is None:
+            mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),os.path.join(savepath,'barcodes.txt'), savepath)
+        else:
+            mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),barcode_path, savepath)
+            
+            
     else:
         raise('--type_saved (-t) must be mtx or h5ad')
         
