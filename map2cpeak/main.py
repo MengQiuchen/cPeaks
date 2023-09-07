@@ -108,7 +108,8 @@ def frag2mtx(fragment_path,savepath,barcode_path):
 
 
 # mtx, cpeaks, barcode to h5ad
-def mtx2h5ad(mtx_path, savepath):
+def mtx2h5ad(mtx_path, barcode_path,savepath):
+
     '''
     mtx_path: path of mtx file
     savepath: path to save h5ad file
