@@ -30,6 +30,16 @@ def frag2mtx(fragment_path,savepath,barcode_path):
 
         # 打开压缩文件并且逐行读取
         with gzip.open(fragment_path, 'rt') as file:
+            #          chr     start   end          barcode
+            # array([['chr1', 181500, 181531, 'AAACAGCCAACCCTAA-1'],
+            #        ['chr1', 629913, 629992, 'AAACAGCCAACCCTAA-1'],
+            #        ['chr1', 629914, 629985, 'AAACAGCCAACCCTAA-1'],
+            #        ['chr1', 629914, 629986, 'AAACAGCCAACCCTAA-1'],
+            #        ['chr1', 629939, 629986, 'AAACAGCCAACCCTAA-1'],
+            #        ['chr1', 633935, 634098, 'AAACAGCCAACCCTAA-1'],
+            #        ['chr1', 633957, 634087, 'AAACAGCCAACCCTAA-1'],
+            #        ... ])
+
             for line in tqdm(file):
                 tmp = line.strip().split('\t')
                 if len(tmp) < 5 or tmp[0] not in chr_list:
