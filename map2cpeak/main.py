@@ -1,7 +1,7 @@
 # python 
-# 2023-09-07
-# version 2.0
-# @auther : Xinze Wus
+# 2024-02-05
+# version 2.1
+# @auther : Xinze Wu
 
 import os
 import sys
@@ -27,11 +27,9 @@ def frag2mtx(fragment_path,savepath,barcode_path):
     
     if barcode_path == None:
 
-
-        # 打开压缩文件并且逐行读取
         with gzip.open(fragment_path, 'rt') as file:
             #          chr     start   end          barcode
-            # array([['chr1', 181500, 181531, 'AAACAGCCAACCCTAA-1'],
+            #       [['chr1', 181500, 181531, 'AAACAGCCAACCCTAA-1'],
             #        ['chr1', 629913, 629992, 'AAACAGCCAACCCTAA-1'],
             #        ['chr1', 629914, 629985, 'AAACAGCCAACCCTAA-1'],
             #        ['chr1', 629914, 629986, 'AAACAGCCAACCCTAA-1'],
