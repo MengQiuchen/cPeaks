@@ -1,18 +1,18 @@
 # python 
-# 2024-02-05
+# 2024-02-07
 # version 2.1
 # @auther : Xinze Wu
 
 import os
 import sys
 import gzip
-import anndata
+# import anndata
 import argparse
-import pandas as pd
+# import pandas as pd
 import numpy as np
-import scanpy as sc
+# import scanpy as sc
 from tqdm import tqdm
-from scipy.io import mmread
+# from scipy.io import mmread
 from collections import Counter,OrderedDict
 
 
@@ -27,9 +27,11 @@ def frag2mtx(fragment_path,savepath,barcode_path):
     
     if barcode_path == None:
 
+
+        # 打开压缩文件并且逐行读取
         with gzip.open(fragment_path, 'rt') as file:
             #          chr     start   end          barcode
-            #       [['chr1', 181500, 181531, 'AAACAGCCAACCCTAA-1'],
+            # array([['chr1', 181500, 181531, 'AAACAGCCAACCCTAA-1'],
             #        ['chr1', 629913, 629992, 'AAACAGCCAACCCTAA-1'],
             #        ['chr1', 629914, 629985, 'AAACAGCCAACCCTAA-1'],
             #        ['chr1', 629914, 629986, 'AAACAGCCAACCCTAA-1'],
@@ -116,26 +118,27 @@ def frag2mtx(fragment_path,savepath,barcode_path):
 
 
 # mtx, cpeaks, barcode to h5ad
-def mtx2h5ad(mtx_path, barcode_path,savepath):
 
-    '''
-    mtx_path: path of mtx file
-    savepath: path to save h5ad file
-    '''
-    print('read mtx')
-    mtx = mmread(mtx_path).tocsr()
+# def mtx2h5ad(mtx_path, barcode_path,savepath):
+
+#     '''
+#     mtx_path: path of mtx file
+#     savepath: path to save h5ad file
+#     '''
+#     print('read mtx')
+#     mtx = mmread(mtx_path).tocsr()
     
-    cpeaks_index = [f'{i[0]}:{i[1]}-{i[2]}' for i in b_peaks]
+#     cpeaks_index = [f'{i[0]}:{i[1]}-{i[2]}' for i in b_peaks]
     
-    print('read barcodes')
-    barcodes = [i.strip() for i in open(barcode_path).readlines()]
+#     print('read barcodes')
+#     barcodes = [i.strip() for i in open(barcode_path).readlines()]
     
-    adata = sc.AnnData(X = mtx.T, obs =  {'barcodes':barcodes},var = {'cpeaks':cpeaks_index},dtype=mtx.dtype)
-    adata.obs_names = barcodes
+#     adata = sc.AnnData(X = mtx.T, obs =  {'barcodes':barcodes},var = {'cpeaks':cpeaks_index},dtype=mtx.dtype)
+#     adata.obs_names = barcodes
     
-    adata.write(os.path.join(savepath,output_name+'.h5ad'))
+#     adata.write(os.path.join(savepath,output_name+'.h5ad'))
     
-    print('write to h5ad done!')
+#     print('write to h5ad done!')
 
 # map bed to bed 
 
@@ -185,9 +188,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--fragment_path", '-f',type=str, default=None,help="path of mtx file")
     parser.add_argument("--barcode_path", '-b',type=str, default=None,help="path of barcode file")
-    parser.add_argument("--output", '-o',type=str, default='./map2cpeaks_result',help="path to save files")
+    parser.add_argument("--output", '-o',type=str, default='map2cpeaks_result',help="path to save files")
     parser.add_argument("--output_name",type=str, default='cell-cpeaks',help="name of output files e.g. cell-cpeaks")
-    parser.add_argument("--type_saved", '-t',type=str, default='mtx',help="save type, h5ad or mtx")
+    #parser.add_argument("--type_saved", '-t',type=str, default='mtx',help="save type, h5ad or mtx")
     parser.add_argument("--bed_path", '-bed',type=str, default=None,help="bed file you called before")
     parser.add_argument("--reference",type=str, default='hg38',help="cpeaks version: hg38 or hg19")
 
@@ -200,7 +203,7 @@ if __name__ == "__main__":
     fragment_path = args.fragment_path
     barcode_path = args.barcode_path
     savepath = args.output
-    save_type = args.type_saved
+    #save_type = args.type_saved
     bed_path = args.bed_path
     reference = args.reference
     output_name = args.output_name
@@ -212,17 +215,24 @@ if __name__ == "__main__":
     if barcode_path is None:
         
         print("using all barcodes in the fragment file")
-        
-    
+    try:
+        if not os.path.exists(savepath):
+            os.makedirs(savepath)
+        print('file will save to ',savepath)
+    except:
+        raise ValueError('savepath is not a valid path or you do not have the permission to create the folder')
+            
     chr_list = ['chr'+str(i) for i in range(1,23)]+['chrX','chrY']
-
 
     if reference == 'hg38':
         cpeaks_path = 'cpeaks_hg38.bed.gz'
     else:
         cpeaks_path = 'cpeaks_hg19.bed.gz'
 
+    print('using reference:',cpeaks_path)
+
     # get cpeaks
+    # print('load cpeaks...')
     dic_chr = OrderedDict()
     b_peaks = []
     for i in range(1,23):
@@ -231,42 +241,40 @@ if __name__ == "__main__":
     dic_chr['chrY'] = OrderedDict()
     
     try:
-        print("read and load cpeaks... 3 min is need...",end = ' ')
+        print("read and load cpeaks... 3 min is need...")
         with gzip.open(cpeaks_path,'rt') as b_file:
             b_lines = b_file.readlines()
             
-        for idx,line in enumerate(b_lines):
+        for idx,line in tqdm(enumerate(b_lines)):
             fields = line.strip().split('\t')
             b_peaks.append((fields[0], int(fields[1]), int(fields[2]))) 
             for j in range(int(fields[1]),int(fields[2])):
                 dic_chr[fields[0]][j] = idx
-        print('done')
+        print('load cpeak finished!')
              
     except:
-        raise('there is sth wrong with cpeaks file, plz send email to wxz22@mails.tsinghua.edu.cn')
+        raise ValueError('there is sth wrong with cpeaks file, plz send email to wxz22@mails.tsinghua.edu.cn')
     
-    if not os.path.exists(savepath):
-        os.makedirs(savepath)
-
+    
     if bed_path is not None:
         print('attention: you use bed file you called before')
         map_bed_to_bed(bed_path, b_peaks,os.path.join(savepath,'res.bed'))
         print("finished!")
         sys.exit(0)
     
-    if save_type == 'mtx':
-        frag2mtx(fragment_path,savepath,barcode_path)
-    elif save_type == 'h5ad':
+    # if save_type == 'mtx':
+    frag2mtx(fragment_path,savepath,barcode_path)
+    # elif save_type == 'h5ad':
         
-        frag2mtx(fragment_path,savepath,barcode_path)
-        if barcode_path is None:
-            mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),os.path.join(savepath,'barcodes.txt'), savepath)
-        else:
-            mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),barcode_path, savepath)
+    #     frag2mtx(fragment_path,savepath,barcode_path)
+    #     if barcode_path is None:
+    #         mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),os.path.join(savepath,'barcodes.txt'), savepath)
+    #     else:
+    #         mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),barcode_path, savepath)
             
             
-    else:
-        raise('--type_saved (-t) must be mtx or h5ad')
+    # else:
+    #     raise('--type_saved (-t) must be mtx or h5ad')
         
 
     print('use time: ',round(time()-time_),"s")
