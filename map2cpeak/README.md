@@ -1,6 +1,6 @@
 ## Map sequencing reads (BAM/fragments.tsv/.bed) to cPeaks
 
-at map2cpeaks folder, just download it and use it.
+at map2cpeaks folder, just download it and use it, you can try to run a dome in dome folder
 
 ### Version
 Python (>=3.7)
@@ -8,11 +8,9 @@ Python (>=3.7)
 ### Requirments
 
 ```
-anndata
-scanpy
 numpy
+gzip
 tqdm
-joblib
 ```
 
 ### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
@@ -28,15 +26,14 @@ cd map2cpeaks
 
 2. 
 
-python main.py --fragment_path path/to/your_fragment.tsv.gz
+python main.py -f path/to/your_fragment.tsv.gz
                
---fragment_path, -f: the input file must be *.tsv.gz file, transfer fragment to cPeak reference
+--fragment_path, -f: the input file must be *.tsv.gz file
  
 optional arguments:
 
  --help, -h:          show this help message
- --barcode_path, -b:  Each line is a barcode, the code will use the barcodes in the file, Default to all barcodes in fragment
- --type_saved, -t:    output file is mtx file or h5ad former, Default to .mtx
+ --barcode_path, -b:  Each line is a barcode, the code will use the barcodes in the file, Default to use all barcodes in fragment
  --output, -o:        output folder, Default to ./map2cpeaks_result
  --output_name:       name of output files, Default to cell-cpeaks.
  --num_cores, -n:     number of cores to use, Default to 10.
