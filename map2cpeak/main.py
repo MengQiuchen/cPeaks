@@ -1,7 +1,7 @@
 # python 
 # 2024-02-07
-# version 2.1
-# @auther : Xinze Wu
+# version 2.18
+# @auther : Xinze Wu; test by Yubo Zhao, Wenchang Chen
 
 import os
 import sys
@@ -209,8 +209,17 @@ if __name__ == "__main__":
     output_name = args.output_name
     
     # fragment_path not end with 'tsv.gz' and not None
-    if fragment_path == None or fragment_path[-6:] != 'tsv.gz':
-        raise ValueError('fragment_path does not end with tsv.gz')
+    try:
+        with gzip.open(fragment_path, 'rt') as file:
+            for line in file:
+                if line[0]=='#' or line[0]=='\n':
+                    continue
+                tmp = line.strip().split('\t')
+                if len(tmp)<3:
+                    raise ValueError('tsv file is empty or the separator is not \\t')
+                break
+    except:
+        raise ValueError('Input file is not a valid tsv.gz file')
     
     if barcode_path is None:
         
@@ -226,8 +235,10 @@ if __name__ == "__main__":
 
     if reference == 'hg38':
         cpeaks_path = 'cpeaks_hg38.bed.gz'
-    else:
+    elif reference == 'hg19':
         cpeaks_path = 'cpeaks_hg19.bed.gz'
+    else:
+        raise ValueError('reference must be hg38 or hg19')
 
     print('using reference:',cpeaks_path)
 
