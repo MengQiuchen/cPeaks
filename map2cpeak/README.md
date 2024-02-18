@@ -13,7 +13,9 @@ gzip
 tqdm
 ```
 
-### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
+### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx)
+
+so, 
  
 ```
 usage:
