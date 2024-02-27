@@ -21,7 +21,7 @@ wget -O cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744e
 ```
 ## cPeak Tutorials in a Nutshell
 
-<img src="https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/media/methods.png" alt="1" style="zoom:70%;" />
+<img src=".\media\methods.png" alt="1" style="zoom:70%;" />
 
 ![Fig 1](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/media/methods.png)
 
@@ -144,7 +144,7 @@ The resulting plot is as follows:
 
 
 
-<img src="..\media\1.png" alt="1" style="zoom:70%;" />
+<img src=".\media\1.png" alt="1" style="zoom:70%;" />
 
 Detailed methods refer to https://kzhang.org/SnapATAC2/tutorials/pbmc.html
 
