@@ -1,0 +1,24 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+p {
+    font-family: 'Roboto Slab Bold', serif;
+}
+
+/* Example: Add padding to paragraphs */
+/* body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', serif;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+} */
