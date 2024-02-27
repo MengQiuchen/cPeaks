@@ -1,6 +1,9 @@
 # How to use cPeak?
+
 Compiled date: 25th Feb
-Source: [Tutorials/xxx](https://breakdance.github.io/breakdance/)
+
+Source: [Tutorials/README.md](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/README.md)
+
 # TODO
 - [ ] 统一cpeaks文件
 - [ ] 页内跳转
@@ -18,6 +21,7 @@ wget -O cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744e
 ```
 ## cPeak Tutorials in a Nutshell
 ![Fig 1](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/media/methods.png)
+
 Using cPeak is to replace call peaking step by using cPeak reference. If you are familiar with snapATAC2 or ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](##2).
 
 snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a widely used R package for ATAC data analysis. Either can be used for ATAC data analysis.
@@ -30,18 +34,19 @@ snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a wid
     data = snapatac2.pp.make_peak_matrix(data, use_rep=cpeaks)
     ```
 - ArchR
-    ```{r, message=FALSE, warning=FALSE}
+    ```r
     cpeaks <- read_table('path_to_downloaded_files/cpeaks.v3.simple.bed',col_names=F)
     cpeaks.gr <- GRanges(seqnames=cpeaks$X1, ranges=IRanges(cpeaks$X2, cpeaks$X3))
     proj <- addFeatureMatrix(proj,features = gr,matrixName='FeatureMatrix')
     ```
 Otherwise, 
 
-* [Direct Use](##1): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment file to cPeak-based data matrix. It can be use to downstream analysis steps.
-* [snapATAC2](##2): snapATAC2 is a widely used python package for ATAC data analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
-* [ArchR](##3): ArchR is a widely used R package for ATAC data analysis.
+* [Direct Use](#method1): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment file to cPeak-based data matrix. It can be use to downstream analysis steps.
+* [snapATAC2](#method2): snapATAC2 is a widely used python package for ATAC data analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
+* [ArchR](#method3): ArchR is a widely used R package for ATAC data analysis.
 
-## Direct Use
+
+## <a id="method1"></a>Direct Use
 
 in map2cpeaks folder, download it and use it, you can try to run a dome in the dome folder
 
@@ -86,7 +91,7 @@ optional arguments:
 
 The output file contains a barcode.txt and an mtx file that stores the matrix of map results.
 
-## Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
+### Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
 
 **This is not a good idea.** It may lose information in the genomic regions which are not included in pre-identfied features. Also, for bulk ATAC-seq data, the quantification of each cPeak is inaccurate.
 
@@ -96,7 +101,7 @@ usage: python main.py [--bed_path feature.bed]
 --bed_path, -bed: the input feature.bed file, for example, MACS2calledPeaks.bed.
 ```
 
-## snapATAC2
+## <a id="method2"></a>snapATAC2
 
 ### 1.Download cPeak
 
@@ -140,7 +145,7 @@ The resulting plot is as follows:
 
 Detailed methods refer to https://kzhang.org/SnapATAC2/tutorials/pbmc.html
 
-## ArchR
+## <a id="method3"></a>ArchR
 
 ### 1.Download cPeak
 

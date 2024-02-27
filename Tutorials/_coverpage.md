@@ -1,9 +1,9 @@
 <!-- 可能需要一个icon --->
 
-# cPeak doc
+# cPeak Tutorials
 
 [Quick Start](index.html)
-[Git Hub](https://github.com/XinzeWu/cPeaks/tree/main)
+[Git Hub](https://github.com/MengQiuchen/cPeaks)
 
 
 ![color](#f0f0f0)
