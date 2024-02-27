@@ -1,24 +1,24 @@
-body {
-    font-family: 'Open Sans', sans-serif;
+/* body {
+    font-family: 'Open Sans';
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab';
 }
 
 p {
-    font-family: 'Roboto Slab Bold', serif;
-}
+    font-family: 'Roboto Slab';
+} */
 
 /* Example: Add padding to paragraphs */
-/* body {
-    font-family: 'Montserrat', sans-serif;
+body {
+    font-family: 'Roboto Slab';
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab';
 }
 
 p {
-    font-family: 'Montserrat', sans-serif;
-} */
+    font-family: 'Roboto Slab';
+}
