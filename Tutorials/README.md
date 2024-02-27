@@ -20,6 +20,9 @@ wget -O cpeaks_hg19_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744
 wget -O cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
 ```
 ## cPeak Tutorials in a Nutshell
+
+<img src="https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/media/methods.png" alt="1" style="zoom:70%;" />
+
 ![Fig 1](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/media/methods.png)
 
 Using cPeak is to replace call peaking step by using cPeak reference. If you are familiar with snapATAC2 or ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](##2).
