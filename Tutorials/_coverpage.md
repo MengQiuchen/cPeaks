@@ -1,6 +1,6 @@
 # cPeak Tutorials
 
-[Quick Start](index.html)
+[Quick Start](docs/Tutorials.md)
 [Git Hub](https://github.com/MengQiuchen/cPeaks)
 
 
