@@ -1,12 +1,12 @@
+# TODO
+- [ ] 统一cpeaks文件
+
+
 # How to use cPeak?
 
 Compiled date: 25th Feb
 
 Source: [Tutorials/README.md](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/README.md)
-
-# TODO
-- [ ] 统一cpeaks文件
-- [ ] 页内跳转
 
 
 cPeak is xxxxxxx. (introduction and benefit) xxx
@@ -23,11 +23,8 @@ wget -O cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744e
 
 <img src=".\media\methods.png" alt="1" style="zoom:70%;" />
 
-![Fig 1](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/media/methods.png)
 
-Using cPeak is to replace call peaking step by using cPeak reference. If you are familiar with snapATAC2 or ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](##2).
-
-snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a widely used R package for ATAC data analysis. Either can be used for ATAC data analysis.
+Using cPeak is to replace call peaking step by using cPeak reference. If you are familiar with snapATAC2 or ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](#method1).
 
 - snapATAC2
     ```python
@@ -42,7 +39,14 @@ snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a wid
     cpeaks.gr <- GRanges(seqnames=cpeaks$X1, ranges=IRanges(cpeaks$X2, cpeaks$X3))
     proj <- addFeatureMatrix(proj,features = gr,matrixName='FeatureMatrix')
     ```
-Otherwise, 
+- Direct Use
+    ```bash
+    cpeaks <- read_table('path_to_downloaded_files/cpeaks.v3.simple.bed',col_names=F)
+    cpeaks.gr <- GRanges(seqnames=cpeaks$X1, ranges=IRanges(cpeaks$X2, cpeaks$X3))
+    proj <- addFeatureMatrix(proj,features = gr,matrixName='FeatureMatrix')
+    ```
+snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a widely used R package for ATAC data analysis. Either can be used for ATAC data analysis.
+
 
 * [Direct Use](#method1): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment file to cPeak-based data matrix. It can be use to downstream analysis steps.
 * [snapATAC2](#method2): snapATAC2 is a widely used python package for ATAC data analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
@@ -144,7 +148,7 @@ The resulting plot is as follows:
 
 
 
-<img src=".\media\1.png" alt="1" style="zoom:70%;" />
+<img src=".\media\umap1.png" alt="1" style="zoom:70%;" />
 
 Detailed methods refer to https://kzhang.org/SnapATAC2/tutorials/pbmc.html
 
