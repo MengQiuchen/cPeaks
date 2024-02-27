@@ -10,8 +10,53 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" title="light">
   <link rel="stylesheet" href="assets/css/main-custom.css">
   <link rel="stylesheet" href="assets/css/button-custom.css">
-
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  
+  <link rel="stylesheet" href="fonts/Roboto-Slab-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts/Roboto-Slab-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+  <link rel="stylesheet" href="media/custom.css">
+
+  <style>
+    aside.sidebar ul li {
+      margin: 0;
+      position: relative;
+    }
+ 
+    aside.sidebar ul li ul {
+      margin: 6px 0;
+    }
+ 
+    aside.sidebar ul li p {
+      padding-left: 22px;
+      font-size: 18px;
+      font-weight: normal;
+    }
+ 
+    aside.sidebar ul li a {
+      line-height: 35px;
+      font-size: 14px;   
+      padding: 3px 0 3px 22px;
+    }
+ 
+    aside.sidebar ul li.active > a {
+      font-size: 16px !important;
+    }
+ 
+    aside.sidebar ul li.active > a:before {
+      content: '' !important;
+      position: absolute !important;
+      margin: 0 !important;
+      width: 10px !important;
+      height: 10px !important;
+      top: 15px !important;
+      left: 0px !important;
+      border-radius: 50% !important;
+      background-color: #fed24a !important;
+      box-shadow: 0 0 0 3px rgba(254, 210, 74, 0.4) !important;
+    }
+</style>
 
 </head>
 <body>
@@ -26,8 +71,8 @@
       loadSidebar: true,
       search: 'auto',
       subMaxLevel:4,
-      coverpage: true,
-      onlyCover: true
+      homepage: 'docs/Tutorials.md',
+      topMargin: 25
     }
   </script>
   <!-- Docsify v4 -->
@@ -39,5 +84,7 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-r.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse"></script> -->
 </body>
 </html>
