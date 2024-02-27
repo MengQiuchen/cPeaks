@@ -2,9 +2,6 @@ Compiled date: 25th Feb
 
 Source: [Tutorials/README.md](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/README.md)
 
-# TODO
-- [ ] 统一cpeaks文件
-
 
 # cPeak Tutorials
 
@@ -15,14 +12,14 @@ xxxxx
 xxxxx
 xxxxx
 
-### Download files
+### Download Files
 
 cPeak reference files are available from:  [hg19 file](https://cloud.tsinghua.edu.cn/f/d9f40ed01cf749478080/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1). Or downloaded by:
 ```bash
 wget -O YOUR_PATH/cpeaks_hg19_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
 wget -O YOUR_PATH/cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
 ```
-## cPeak Tutorials in a Nutshell
+## Usages in a Nutshell
 
 <img src=".\media\methods.png" alt="1" style="zoom:70%;" />
 
@@ -42,75 +39,25 @@ Using cPeak is to replace call peaking step by using cPeak reference. If you are
     cpeaks.gr <- GRanges(seqnames=cpeaks$X1, ranges=IRanges(cpeaks$X2, cpeaks$X3))
     proj <- addFeatureMatrix(proj,features = gr,matrixName='FeatureMatrix')
     ```
-- Direct Use
+- Run Python Script Manually
     ```bash
-
+    git clone https://github.com/MengQiuchen/cPeaks.git
+    cd cPeaks/map2cpeaks
+    python main.py --fragment_path PATH/to/YOUR_fragment.tsv.gz --output map2cpeaks_result --output_name Cell_by_cPeak_Matrix --type_saved .mtx
     ```
+    [See more about paramters for main.py](#param).
 
-## <a id="detail"></a>cPeak Tutorials in Detail
 
+## <a id="detail"></a>Usages in Detail
+
+You can use cPeak
 snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a widely used R package for ATAC data analysis. Either can be used for ATAC data analysis.
 
-
-* [Direct Use](#method1): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment file to cPeak-based data matrix. It can be use to downstream analysis steps.
 * [snapATAC2](#method2): snapATAC2 is a widely used python package for ATAC data analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
 * [ArchR](#method3): ArchR is a widely used R package for ATAC data analysis.
+* [Direct Use](#method1): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment file to cPeak-based data matrix. It can be use to downstream analysis steps.
 
 
-## <a id="method1"></a>Direct Use
-
-in map2cpeaks folder, download it and use it, you can try to run a dome in the dome folder
-
-### Version
-Python (>=3.7)
-
-### Requirments
-
-```
-numpy
-gzip
-tqdm
-```
-
-### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
-
-Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
-```bash
-usage:
-
-1.
-
-
-cd map2cpeaks
-
-
-2. 
-
-python main.py -f path/to/your_fragment.tsv.gz
-               
---fragment_path, -f: the input file must be *.tsv.gz file. If barcode_path is None, tsv file need contain 4 columns:chr, start, end, barcode, sep with '\t'. If barcode_path is  not None, tsv file need contain 3 columns:chr, start, end, sep with '\t';
- 
-optional arguments:
-
- --help, -h:          show this help message
- --barcode_path, -b:  Each line is a barcode, the code will use the barcodes in the file, Default to use all barcodes in fragment
- --output, -o:        output folder, Default to ./map2cpeaks_result
- --output_name:       name of output files, Default to cell-cpeaks.
- --num_cores, -n:     number of cores to use, Default to 10.
- --reference:         cPeak version, hg38 or hg19, Default to hg38.
-```
-
-The output file contains a barcode.txt and an mtx file that stores the matrix of map results.
-
-### Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
-
-**This is not a good idea.** It may lose information in the genomic regions which are not included in pre-identfied features. Also, for bulk ATAC-seq data, the quantification of each cPeak is inaccurate.
-
-```bash
-usage: python main.py [--bed_path feature.bed]
-
---bed_path, -bed: the input feature.bed file, for example, MACS2calledPeaks.bed.
-```
 
 ## <a id="method2"></a>snapATAC2
 
@@ -243,5 +190,49 @@ res = get_cluster("sort.HSC.fragments.tsv.gz",'HSC_all',num_cluster = 10,gr=cpea
 
 ```
 
+## <a id="method1"></a>Run Python Script Manually 
+
+### <a id="param"></a>main.py Parameters
+
+| Parameter | Default | Description |
+| ------ | ------ | ------ | 
+| fragment_path | - | The input file must be *.tsv.gz file, which will be transformed to cPeak reference. |
+| barcode_path | - | If barcode file is given, barcode in the file or all barcodes in the fragment will be used. |
+| reference | hg38 | cPeak version, hg38 or hg19. |
+| type_saved | .mtx | The type of output file, .mtx or .h5ad. |
+| output | map2cpeaks_result | Output folder name. |
+| output_name | cell-cpeaks | Name of output files. |
+| num_cores | 10 |  Number of cores to use. |
+
+
+### Version
+Python (>=3.7)
+
+### Requirments
+
+```
+numpy
+gzip
+tqdm
+```
+
+### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
+
+Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
+```bash
+usage:
+
+
+The output file contains a barcode.txt and an mtx file that stores the matrix of map results.
+
+### Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
+
+**This is not a good idea.** It may lose information in the genomic regions which are not included in pre-identfied features. Also, for bulk ATAC-seq data, the quantification of each cPeak is inaccurate.
+
+```bash
+usage: python main.py [--bed_path feature.bed]
+
+--bed_path, -bed: the input feature.bed file, for example, MACS2calledPeaks.bed.
+```
 
 
