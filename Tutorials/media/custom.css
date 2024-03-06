@@ -1,24 +1,92 @@
-/* body {
-    font-family: 'Open Sans';
-}
+/* Custom Docsify CSS */
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto Slab';
-}
-
-p {
-    font-family: 'Roboto Slab';
-} */
-
-/* Example: Add padding to paragraphs */
+/* Body styling */
 body {
-    font-family: 'Roboto Slab';
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
+/* Container for the main content */
+.content {
+    max-width: calc(100% - 240px);
+    margin-left: 240px;
+    padding: 20px;
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Hyperlinks with a different color */
+.content a {
+    color: #356fdc; /* Change this color to the desired color for hyperlinks */
+    font-weight: bold;
+}
+
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto Slab';
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-p {
-    font-family: 'Roboto Slab';
+
+/* Code blocks */
+pre {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace; /* Use Fira Code font */
+    font-size: 14px; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height as needed */
+}
+
+/* Inline code */
+code {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-family: 'Fira Code', monospace; /* Use Fira Code font */
+    font-size: 14px; /* Adjust font size as needed */
+}
+
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Hide horizontal scrollbar */
+::-webkit-scrollbar {
+    display: none;
 }
