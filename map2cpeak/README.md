@@ -1,6 +1,6 @@
 ## Map sequencing reads (BAM/fragments.tsv/.bed) to cPeaks
 
-in map2cpeaks folder, download it and use it, you can try to run a dome in the dome folder
+in map2cpeaks folder, download it and use it, you can try to run a demo in the demo folder
 
 ### Version
 Python (>=3.7)
