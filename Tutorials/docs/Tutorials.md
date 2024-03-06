@@ -24,7 +24,7 @@ wget -O YOUR_PATH/cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c8
 <img src=".\media\methods.png" alt="1" style="zoom:70%;" />
 
 
-Using cPeak is to replace call peaking step by using cPeak reference. If you are familiar with snapATAC2 or ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](#detail).
+Using cPeak is to replace the call peaking step by using cPeak reference. If you are familiar with snapATAC2, ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](#detail).
 
 - snapATAC2
     ```python
