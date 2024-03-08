@@ -1,7 +1,6 @@
 # python 
-# 2024-02-07
-# version 2.18
-# @auther : Xinze Wu; test by Yubo Zhao, Wenchang Chen
+# 2024-3-8
+# @auther : Xinze Wu
 
 import os
 import sys
@@ -49,11 +48,16 @@ def frag2mtx(fragment_path,savepath,barcode_path):
 
                 idx_set = set()
                 for i in range(int(tmp[1]), int(tmp[2]), 59):
-                    if i in dic_chr[tmp[0]].keys():
-                        idx_set.add(dic_chr[tmp[0]][i])
-
-                if int(tmp[2])-1 in dic_chr[tmp[0]]:
-                    idx_set.add(dic_chr[tmp[0]][int(tmp[2])-1])
+                    try:
+                        if dic_chr[tmp[0]][i]!=-1:
+                            idx_set.add(dic_chr[tmp[0]][i])
+                    except:
+                        continue
+                try:
+                    if dic_chr[tmp[0]][int(tmp[2])-1]!=-1:
+                        idx_set.add(dic_chr[tmp[0]][int(tmp[2])-1])
+                except:
+                    continue
                 bar2idx[tmp[3]] += list(idx_set)
 
         value_num = 0
@@ -90,12 +94,18 @@ def frag2mtx(fragment_path,savepath,barcode_path):
 
                 idx_set = set()
                 for i in range(int(tmp[1]), int(tmp[2]), 59):
-                    if i in dic_chr[tmp[0]].keys():
-                        idx_set.add(dic_chr[tmp[0]][i])
-
-                if int(tmp[2])-1 in dic_chr[tmp[0]]:
-                    idx_set.add(dic_chr[tmp[0]][int(tmp[2])-1])
+                    try:
+                        if dic_chr[tmp[0]][i]!=-1:
+                            idx_set.add(dic_chr[tmp[0]][i])
+                    except:
+                        continue
+                try:
+                    if dic_chr[tmp[0]][int(tmp[2])-1]!=-1:
+                        idx_set.add(dic_chr[tmp[0]][int(tmp[2])-1])
+                except:
+                    continue
                 bar2idx[tmp[3]] += list(idx_set)
+
         value_num = 0
         bar2dic = OrderedDict()
         for i,j in bar2idx.items():
@@ -183,6 +193,183 @@ def map_bed_to_bed(a_bed_path, b_peaks,savepath):
             f.write(b_peaks[i][0]+'\t'+str(b_peaks[i][1])+'\t'+str(b_peaks[i][2])+'\n')
     print('done') 
 
+def cpeak_init(mode,reference):
+
+    
+    # get cpeaks
+    # print('load cpeaks...')
+
+    # hg38
+    # chr1    248956422
+    # chr2    242193529
+    # chr3    198295559
+    # chr4    190214555
+    # chr5    181538259
+    # chr6    170805979
+    # chr7    159345973
+    # chr8    145138636
+    # chr9    138394717
+    # chr10   133797422
+    # chr11   135086622
+    # chr12   133275309
+    # chr13   114364328
+    # chr14   107043718
+    # chr15   101991189
+    # chr16   90338345
+    # chr17   83257441
+    # chr18   80373285
+    # chr19   58617616
+    # chr20   64444167
+    # chr21   46709983
+    # chr22   50818468
+    # chrX    156040895
+    # chrY    57227415
+
+    # hg19
+    # chr1    249250621
+    # chr2    243199373
+    # chr3    198022430
+    # chr4    191154276
+    # chr5    180915260
+    # chr6    171115067
+    # chr7    159138663
+    # chr8    146364022
+    # chr9    141213431
+    # chr10   135534747
+    # chr11   135006516
+    # chr12   133851895
+    # chr13   115169878
+    # chr14   107349540
+    # chr15   102531392
+    # chr16   90354753
+    # chr17   81195210
+    # chr18   78077248
+    # chr19   59128983
+    # chr20   63025520
+    # chr21   48129895
+    # chr22   51304566
+    # chrX    155270560
+    # chrY    59373566
+
+
+    dic_chr = {}
+    if mode == 'performance':
+        if reference == 'hg38':
+            dic_chr['chr1'] = np.full(248956422, -1,dtype=int)
+            dic_chr['chr2'] = np.full(242193529, -1,dtype=int)
+            dic_chr['chr3'] = np.full(198295559, -1,dtype=int)
+            dic_chr['chr4'] = np.full(190214555, -1,dtype=int)
+            dic_chr['chr5'] = np.full(181538259, -1,dtype=int)
+            dic_chr['chr6'] = np.full(170805979, -1,dtype=int)
+            dic_chr['chr7'] = np.full(159345973, -1,dtype=int)
+            dic_chr['chr8'] = np.full(145138636, -1, dtype=int)
+            dic_chr['chr9'] = np.full(138394717, -1, dtype=int)
+            dic_chr['chr10'] = np.full(133797422, -1, dtype=int)
+            dic_chr['chr11'] = np.full(135086622, -1, dtype=int)
+            dic_chr['chr12'] = np.full(133275309, -1, dtype=int)
+            dic_chr['chr13'] = np.full(114364328, -1, dtype=int)
+            dic_chr['chr14'] = np.full(107043718, -1, dtype=int)
+            dic_chr['chr15'] = np.full(101991189, -1, dtype=int)
+            dic_chr['chr16'] = np.full(90338345, -1, dtype=int)
+            dic_chr['chr17'] = np.full(83257441, -1, dtype=int)
+            dic_chr['chr18'] = np.full(80373285, -1, dtype=int)
+            dic_chr['chr19'] = np.full(58617616, -1, dtype=int)
+            dic_chr['chr20'] = np.full(64444167, -1, dtype=int)
+            dic_chr['chr21'] = np.full(46709983, -1, dtype=int)
+            dic_chr['chr22'] = np.full(50818468, -1, dtype=int)
+            dic_chr['chrX'] = np.full(156040895, -1, dtype=int)
+            dic_chr['chrY'] = np.full(57227415, -1, dtype=int)
+        elif reference == 'hg19':
+            dic_chr['chr1'] = np.full(249250621, -1, dtype=int)
+            dic_chr['chr2'] = np.full(243199373, -1, dtype=int)
+            dic_chr['chr3'] = np.full(198022430, -1, dtype=int)
+            dic_chr['chr4'] = np.full(191154276, -1, dtype=int)
+            dic_chr['chr5'] = np.full(180915260, -1, dtype=int)
+            dic_chr['chr6'] = np.full(171115067, -1, dtype=int)
+            dic_chr['chr7'] = np.full(159138663, -1, dtype=int)
+            dic_chr['chr8'] = np.full(146364022, -1, dtype=int)
+            dic_chr['chr9'] = np.full(141213431, -1, dtype=int)
+            dic_chr['chr10'] = np.full(135534747, -1, dtype=int)
+            dic_chr['chr11'] = np.full(135006516, -1, dtype=int)
+            dic_chr['chr12'] = np.full(133851895, -1, dtype=int)
+            dic_chr['chr13'] = np.full(115169878, -1, dtype=int)
+            dic_chr['chr14'] = np.full(107349540, -1, dtype=int)
+            dic_chr['chr15'] = np.full(102531392, -1, dtype=int)
+            dic_chr['chr16'] = np.full(90354753, -1, dtype=int)
+            dic_chr['chr17'] = np.full(81195210, -1, dtype=int)
+            dic_chr['chr18'] = np.full(78077248, -1, dtype=int)
+            dic_chr['chr19'] = np.full(59128983, -1, dtype=int)
+            dic_chr['chr20'] = np.full(63025520, -1, dtype=int)
+            dic_chr['chr21'] = np.full(48129895, -1, dtype=int)
+            dic_chr['chr22'] = np.full(51304566, -1, dtype=int)
+            dic_chr['chrX'] = np.full(155270560, -1, dtype=int)
+            dic_chr['chrY'] = np.full(59373566, -1, dtype=int)
+
+        else:
+            raise ValueError('reference must be hg38 or hg19')
+    else:
+        int32 = np.int32
+        if reference == 'hg38':
+            dic_chr['chr1'] = np.full(248956422, -1,dtype=int32)
+            dic_chr['chr2'] = np.full(242193529, -1,dtype=int32)
+            dic_chr['chr3'] = np.full(198295559, -1,dtype=int32)
+            dic_chr['chr4'] = np.full(190214555, -1,dtype=int32)
+            dic_chr['chr5'] = np.full(181538259, -1,dtype=int32)
+            dic_chr['chr6'] = np.full(170805979, -1,dtype=int32)
+            dic_chr['chr7'] = np.full(159345973, -1,dtype=int32)
+            dic_chr['chr8'] = np.full(145138636, -1,dtype=int32)
+            dic_chr['chr9'] = np.full(138394717, -1,dtype=int32)
+            dic_chr['chr10'] = np.full(133797422, -1,dtype=int32)
+            dic_chr['chr11'] = np.full(135086622, -1,dtype=int32)
+            dic_chr['chr12'] = np.full(133275309, -1,dtype=int32)
+            dic_chr['chr13'] = np.full(114364328, -1,dtype=int32)
+            dic_chr['chr14'] = np.full(107043718, -1,dtype=int32)
+            dic_chr['chr15'] = np.full(101991189, -1,dtype=int32)
+            dic_chr['chr16'] = np.full(90338345, -1,dtype=int32)
+            dic_chr['chr17'] = np.full(83257441, -1,dtype=int32)
+            dic_chr['chr18'] = np.full(80373285, -1,dtype=int32)
+            dic_chr['chr19'] = np.full(58617616, -1,dtype=int32)
+            dic_chr['chr20'] = np.full(64444167, -1,dtype=int32)
+            dic_chr['chr21'] = np.full(46709983, -1,dtype=int32)
+            dic_chr['chr22'] = np.full(50818468, -1,dtype=int32)
+            dic_chr['chrX'] = np.full(156040895, -1,dtype=int32)
+            dic_chr['chrY'] = np.full(57227415, -1,dtype=int32)
+
+        elif reference == 'hg19':
+            dic_chr['chr1'] = np.full(249250621, -1,dtype=int32)
+            dic_chr['chr2'] = np.full(243199373, -1,dtype=int32)
+            dic_chr['chr3'] = np.full(198022430, -1,dtype=int32)
+            dic_chr['chr4'] = np.full(191154276, -1,dtype=int32)
+            dic_chr['chr5'] = np.full(180915260, -1,dtype=int32)
+            dic_chr['chr6'] = np.full(171115067, -1,dtype=int32)
+            dic_chr['chr7'] = np.full(159138663, -1,dtype=int32)
+            dic_chr['chr8'] = np.full(146364022, -1,dtype=int32)
+            dic_chr['chr9'] = np.full(141213431, -1,dtype=int32)
+            dic_chr['chr10'] = np.full(135534747, -1,dtype=int32)
+            dic_chr['chr11'] = np.full(135006516, -1,dtype=int32)
+            dic_chr['chr12'] = np.full(133851895, -1,dtype=int32)
+            dic_chr['chr13'] = np.full(115169878, -1,dtype=int32)
+            dic_chr['chr14'] = np.full(107349540, -1,dtype=int32)
+            dic_chr['chr15'] = np.full(102531392, -1,dtype=int32)
+            dic_chr['chr16'] = np.full(90354753, -1,dtype=int32)
+            dic_chr['chr17'] = np.full(81195210, -1,dtype=int32)
+            dic_chr['chr18'] = np.full(78077248, -1,dtype=int32)
+            dic_chr['chr19'] = np.full(59128983, -1,dtype=int32)
+            dic_chr['chr20'] = np.full(63025520, -1,dtype=int32)
+            dic_chr['chr21'] = np.full(48129895, -1,dtype=int32)
+            dic_chr['chr22'] = np.full(51304566, -1,dtype=int32)
+            dic_chr['chrX'] = np.full(155270560, -1,dtype=int32)
+            dic_chr['chrY'] = np.full(59373566, -1,dtype=int32)
+        else:
+            raise ValueError('reference must be hg38 or hg19')
+    return dic_chr
+ 
+
+
+
+    
+  
+
 # main 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -190,7 +377,7 @@ if __name__ == "__main__":
     parser.add_argument("--barcode_path", '-b',type=str, default=None,help="path of barcode file")
     parser.add_argument("--output", '-o',type=str, default='map2cpeaks_result',help="path to save files")
     parser.add_argument("--output_name",type=str, default='cell-cpeaks',help="name of output files e.g. cell-cpeaks")
-    #parser.add_argument("--type_saved", '-t',type=str, default='mtx',help="save type, h5ad or mtx")
+    parser.add_argument("--mode",type=str, default='performance',help="performance or normal, performance mode enabled: More memory will be used")
     parser.add_argument("--bed_path", '-bed',type=str, default=None,help="bed file you called before")
     parser.add_argument("--reference",type=str, default='hg38',help="cpeaks version: hg38 or hg19")
 
@@ -203,7 +390,7 @@ if __name__ == "__main__":
     fragment_path = args.fragment_path
     barcode_path = args.barcode_path
     savepath = args.output
-    #save_type = args.type_saved
+    mode = args.mode
     bed_path = args.bed_path
     reference = args.reference
     output_name = args.output_name
@@ -242,25 +429,19 @@ if __name__ == "__main__":
 
     print('using reference:',cpeaks_path)
 
-    # get cpeaks
-    # print('load cpeaks...')
-    dic_chr = OrderedDict()
-    b_peaks = []
-    for i in range(1,23):
-        dic_chr[f'chr{i}'] = OrderedDict()
-    dic_chr['chrX'] = OrderedDict()
-    dic_chr['chrY'] = OrderedDict()
-    
+    dic_chr = cpeak_init(mode,reference)
+   
     try:
-        print("read and load cpeaks... 3 min is need...")
+        b_peaks = []
+        print("read and load cpeaks...")
         with gzip.open(cpeaks_path,'rt') as b_file:
             b_lines = b_file.readlines()
             
         for idx,line in tqdm(enumerate(b_lines)):
             fields = line.strip().split('\t')
-            b_peaks.append((fields[0], int(fields[1]), int(fields[2]))) 
-            for j in range(int(fields[1]),int(fields[2])):
-                dic_chr[fields[0]][j] = idx
+            b_peaks.append((fields[0], int(fields[1]), int(fields[2])))
+            dic_chr[fields[0]][int(fields[1]):(int(fields[2])+1)] = idx
+            
         print('load cpeak finished!')
              
     except:
