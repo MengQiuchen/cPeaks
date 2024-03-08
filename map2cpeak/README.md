@@ -1,54 +1,74 @@
-## Map sequencing reads (BAM/fragments.tsv/.bed) to cPeaks
+# Map Sequencing Reads to cPeaks Using Map2cpeak
 
-in map2cpeaks folder, download it and use it, you can try to run a demo in the demo folder
+## Getting Started
+Navigate to the `map2cpeaks` directory for the setup. You can find the software needed for download and execution here. For first-time users, a demo is available in the `demo` folder.
 
-### Version
-Python (>=3.7)
+## Requirements
+- Python version 3.7 or higher
+- Libraries Required:
+  - numpy
+  - gzip
+  - tqdm
+    
+(Install these libraries before the mapping process)
 
-### Requirments
+## Method 1: Mapping Reads to Generate a cell-by-cPeak Matrix (.mtx)
 
-```
-numpy
-gzip
-tqdm
-```
+This method involves mapping sequencing reads from the `fragments.tsv.gz` file of each sample or cell to create a cell-by-cPeak matrix in .mtx format.
 
-### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx)
+**Important**: Ensure that at least 20GB of memory is allocated to run this process using `--mode 'normal'`. For a quicker execution, switch to the 'performance' mode if you have at least 30GB of memory.
 
-so, 
- 
-```
-usage:
+### Usage Instructions:
 
-1.
-
-
+#### Step 1
+Navigate to the `map2cpeaks` directory:
+```bash
 cd map2cpeaks
+```
+#### Step 2 To map your sequencing reads:
 
-
-2. 
-
+```bash
 python main.py -f path/to/your_fragment.tsv.gz
-               
---fragment_path, -f: the input file must be *.tsv.gz file
- 
-optional arguments:
-
- --help, -h:          show this help message
- --barcode_path, -b:  Each line is a barcode, the code will use the barcodes in the file, Default to use all barcodes in fragment
- --output, -o:        output folder, Default to ./map2cpeaks_result
- --output_name:       name of output files, Default to cell-cpeaks.
- --num_cores, -n:     number of cores to use, Default to 10.
- --reference:         cPeak version, hg38 or hg19, Default to hg38.
 ```
+• --fragment_path, -f: Input file path (must be a .gz file).
 
+Optional Arguments:
 
-### Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
+• --help, -h: Display help information.
+• --barcode_path, -b: Specify a file containing barcodes to be used. If not specified, all barcodes in the fragment file will be used.
+• --output, -o: Designate an output folder (default is ./map2cpeaks_result).
+• --output_name: Name the output files (default is cell-cpeaks).
+• --mode: Choose between 'performance' (uses more memory for faster results) or 'normal' mode (default is 'performance').
+• --reference: Specify the cPeak version, either 'hg38' or 'hg19' (default is 'hg38').
 
-**This is not a good idea.** It may lose information in the genomic regions which are not included in pre-identfied features. Also, for bulk ATAC-seq data, the quantification of each cPeak is inaccurate.
+For example:
 
+To run a demo mapping:
+
+```bash
+python main.py -f demo/test_fragment.tsv.gz
 ```
-usage: python main.py [--bed_path feature.bed]
+To use a provided barcode mapping (ensure 'barcodes.txt' is included in the fragments):
 
---bed_path, -bed: the input feature.bed file, for example, MACS2calledPeaks.bed.
+```bash
+python main.py -f demo/test_fragment.tsv.gz -b demo/test_barcodes.txt --reference hg19
 ```
+The resulting output will include a 'barcode.txt' and a '.mtx' file housing the mapping matrix.
+
+To use hg19 as a reference of mapping, you can run:
+
+```bash
+python main.py -f demo/test_fragment.tsv.gz --reference hg19
+```
+## Method 2: Mapping Pre-Identified Features to cPeaks (Not Recommended)
+
+Caution: This method can result in loss of genomic information as it only considers the pre-identified features. Moreover, the quantification of cPeaks may not be accurate for bulk ATAC-seq data.
+
+Usage for Pre-Identified Feature Mapping:
+
+```bash
+python main.py [--bed_path feature.bed]
+```
+• --bed_path, -bed: Input the .bed file of features, such as 'MACS2calledPeaks.bed'.
+
+Remember to priorly adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
