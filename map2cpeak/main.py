@@ -403,10 +403,10 @@ if __name__ == "__main__":
                     continue
                 tmp = line.strip().split('\t')
                 if len(tmp)<3:
-                    raise ValueError('tsv file is empty or the separator is not \\t')
+                    raise ValueError('fragment file is empty or the separator is not \\t')
                 break
     except:
-        raise ValueError('Input file is not a valid tsv.gz file')
+        raise ValueError('Input file is not a valid fragment file')
     
     if barcode_path is None:
         
