@@ -5,7 +5,7 @@ Source: [Tutorials/README.md](https://github.com/MengQiuchen/cPeaks/blob/dev-tut
 
 # cPeak Tutorials
 
-## What is cPeak?
+## 1. What is cPeak?
 
 cPeak is xxxxxxx. (introduction and benefit) xxx
 xxxxx
@@ -14,22 +14,27 @@ xxxxx
 
 ### Download Files
 
-cPeak reference files are available from:  [hg19 file](https://cloud.tsinghua.edu.cn/f/d9f40ed01cf749478080/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1). Or downloaded by:
+cPeak reference files can be obtained from the following links: [hg19 file](https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1). Alternatively, you can download them using the following commands:
+
 ```bash
-wget -O YOUR_PATH/cpeaks_hg19_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
-wget -O YOUR_PATH/cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
+wget -O YOUR_PATH/cpeaks_hg19.bed https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1
+wget -O YOUR_PATH/cpeaks_hg38.bed https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1
 ```
-## Usages in a Nutshell
 
-<img src=".\media\methods.png" alt="1" style="zoom:70%;" />
+We will utilize the downloaded files in the upcoming tutorials.
+
+## 2. Usages in a Nutshell
+
+<img src=".\media\methods.png" alt="1" style="zoom:100%;" />
 
 
-Using cPeak is to replace the call peaking step by using cPeak reference. If you are familiar with snapATAC2, ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](#detail).
+Using cPeak is to replace the call peaking step by using cPeak reference. If you are familiar with SnapATAC2, ArchR or python, this part we will help you get started with cPeak very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](#detail).
 
-- snapATAC2
+- SnapATAC2
     ```python
     # read cPeak file
-    cpeaks = open('YOUR_PATH/cpeaks_hg19_features.txt').read().strip().split()
+    cpeaks = open('cpeaks_hg38.bed').read().strip().split('\n')[1:]
+    cpeaks = [i.split('\t')[0]+':'+i.split('\t')[1]+'-'+i.split('\t')[2] for i in cpeaks]
     # set parameter use_rep as
     data = snapatac2.pp.make_peak_matrix(data, use_rep=cpeaks)
     ```
@@ -45,78 +50,56 @@ Using cPeak is to replace the call peaking step by using cPeak reference. If you
     cd cPeaks/map2cpeaks
     python main.py --fragment_path PATH/to/YOUR_fragment.tsv.gz --output map2cpeaks_result --output_name Cell_by_cPeak_Matrix --type_saved .mtx
     ```
+    After manually running `main.py`, you will get a matrix file `Cell_by_cPeak_Matrix.mtx` under a newly created folder `map2cpeaks_result`.
+
     [See more about paramters for main.py](#param).
 
 
-## <a id="detail"></a>Usages in Detail
+## <a id="detail"></a>3. Usages in Detail
 
-You can use cPeak
-snapATAC2 is a widely used python package for ATAC data analysis. ArchR is a widely used R package for ATAC data analysis. Either can be used for ATAC data analysis.
+SnapATAC2 and ArchR are two popular packages for scATAC-seq (single-cell epigenomics?) data analysis. Integrating cPeak into the analysis workflow of these packages is straightforward and seamless. Additionally, we provide an easy-to-use Python script for transforming fragment files into cell-by-peak matrices. In the following sections, we present detailed code examples and explanations for three scenarios corresponding to the aforementioned cases.
 
-* [snapATAC2](#method2): snapATAC2 is a widely used python package for ATAC data analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
-* [ArchR](#method3): ArchR is a widely used R package for ATAC data analysis.
-* [Direct Use](#method1): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment file to cPeak-based data matrix. It can be use to downstream analysis steps.
-
-
-
-## <a id="method2"></a>snapATAC2
-
-### 1.Download cPeak
-
-```bash
-wget -O cpeaks_hg19_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
-wget -O cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
-```
-
-### 2.Install snapATAC2
-
-https://kzhang.org/SnapATAC2/install.html
-
-### 3.Analyze cPeak with snapATAC2
-
-To start, we need to download a fragment file. This can be achieved from https://cloud.tsinghua.edu.cn/d/7f2ccf8067314a4b9a02/ 
-```python
-import snapatac2 as snap
-
-data = snap.pp.import_data(
-    fragment_paths,
-    chrom_sizes=snap.genome.hg19,
-    sorted_by_barcode=False,
-    n_jobs=90
-    )
-
-snap.metrics.tsse(data, snap.genome.hg38)
-data = snap.pp.make_peak_matrix(data,use_rep=gr)
-snap.pp.select_features(data,n_features=len(gr)) # kan renbin 
-snap.tl.spectral(data,n_comps=30)
-snap.tl.umap(data)
-snap.pp.knn(data)
-snap.tl.leiden(data,resolution=0.5)
-snap.pl.umap(data, color='leiden', interactive=False, height=500)
-```
-
-The resulting plot is as follows:
+* [SnapATAC2](#method1): 用cpeak用这个包做了什么 Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
+* [ArchR](#method2): 用cpeak用这个包做了什么 Click the [link](https://github.com/GreenleafLab/ArchR) for detailed information.
+* [Run Python Script Manually](#method3): Use python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment files to cPeak-based data matrics, which can be use to downstream analysis steps.
 
 
 
-<img src=".\media\umap1.png" alt="1" style="zoom:70%;" />
+### <a id="method1"></a>3.1 SnapATAC2
 
-Detailed methods refer to https://kzhang.org/SnapATAC2/tutorials/pbmc.html
+#### Install SnapATAC2
 
-## <a id="method3"></a>ArchR
-
-### 1.Download cPeak
+SnapATAC2 requires python>=3.8. There have been changes in the functions and some function parameters between versions 2.4 and 2.5 of SnapATAC2. We recommend installing the 2.5 or higher versions, for compatibility and access to the most recent features and improvements.
 
 ```bash
-wget -O cpeaks_hg19_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
-wget -O cpeak_hg38_features.txt 'https://cloud.tsinghua.edu.cn/f/dc1c89903e8744eea0aa/?dl=1'
+pip install snapatac2==2.5
 ```
 
-### 2. Install ArchR
+For more installation options, please refer to [SnapATAC2 installation instructions](https://kzhang.org/SnapATAC2/install.html).
 
- https://www.archrproject.com/
 
-### 3. Analyze cPeak with ArchR
+#### Utilize cPeak with SnapATAC2
+
+The example codes and descriptions in this section are adapted from [SnapATAC2 standard pipeline](https://kzhang.org/SnapATAC2/tutorials/pbmc.html). You can download the code file here: [cPeak_SnapATAC2.ipynb](https://TODO). TODO: add file link
+
+
+[testtest](media/cPeak_SnapATAC2.md ':include')
+
+
+### <a id="method2"></a>3.2 ArchR
+
+#### Install ArchR
+
+```r
+if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+devtools::install_github("GreenleafLab/ArchR", ref="master", repos = BiocManager::repositories())
+```
+
+If you encounter any installation issues, please refer to [ArchR installation instructions]( https://www.archrproject.com/).
+
+
+#### Utilize cPeak with ArchR
 
 Code references to https://www.archrproject.com/bookdown/index.html
 
