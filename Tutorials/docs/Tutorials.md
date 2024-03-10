@@ -6,6 +6,8 @@ Source: [Tutorials/README.md](https://github.com/MengQiuchen/cPeaks/blob/dev-tut
 
 ## 1. What is cPeak?
 
+<img src=".\media\Cover.png" alt="1" width="500" style="zoom:100%;" />
+
 cPeak is xxxxxxx. (introduction and benefit) xxx
 xxxxx
 xxxxx
@@ -49,7 +51,7 @@ Using cPeak is to replace the call peaking step by using cPeak reference. If you
     cd cPeaks/map2cpeaks
     python main.py --fragment_path PATH/to/YOUR_fragment.tsv.gz --output map2cpeaks_result --output_name Cell_by_cPeak_Matrix --type_saved .mtx
     ```
-    After manually running `main.py`, you will get a matrix file `Cell_by_cPeak_Matrix.mtx` under a newly created folder `map2cpeaks_result`.
+    After manually running `main.py`, you will get a matrix file `Cell_by_cPeak_Matrix.mtx` and a text file `barcodes.txt` under a newly created folder `map2cpeaks_result`.
 
     [See more about paramters for main.py](#param).
 
