@@ -57,7 +57,7 @@ snap.pp.filter_cells(data, min_counts=5000, min_tsse=10, max_counts=100000)
 We next create a cell by peak matrix based on cPeaks reference files.
 
 ```python
-cpeaks_path = '../data/cpeaks_hg38.bed'
+cpeaks_path = 'YOUR_PATH/cpeaks_hg38.bed'
 with open(cpeaks_path) as cpeaks_file:
     cpeaks = cpeaks_file.read().strip().split('\n')
 cpeaks = [peak.split('\t')[0] + ':' + peak.split('\t')[1] + '-' + peak.split('\t')[2] for peak in cpeaks]
