@@ -24,8 +24,7 @@ The Hematopoeisis tutorial data can be downloaded using the [getTutorialData()](
 inputFiles <- getTutorialData("Hematopoiesis")
 ```
 
-Before we begin, we need add a reference genome annotation for ArchR to have access to chromosome and gene information. ArchR natively supports hg19, hg38, mm9, and mm10.
-
+Before we begin, we need add a reference genome annotation for ArchR to have access to chromosome and gene information. ArchR natively supports hg19, hg38, mm9, and mm10. For cPeaks, we supports hg19 and hg38.
 
 ```R
 addArchRGenome('hg19')
@@ -45,7 +44,7 @@ Now we will create our Arrow files which will take 10-15 minutes. For each sampl
 ArrowFiles <- createArrowFiles(
   inputFiles = inputFiles,
   sampleNames = names(inputFiles),
-  minTSS = 4, #Dont set this too high because you can always increase later
+  minTSS = 4, #Don't set this too high because you can always increase later
   minFrags = 1000, 
   addTileMat = TRUE,
   addGeneScoreMat = TRUE

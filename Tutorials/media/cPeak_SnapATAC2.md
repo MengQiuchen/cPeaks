@@ -108,10 +108,11 @@ snap.tl.leiden(data)
 snap.pl.umap(data, color='leiden', interactive=False, height=500)
 ```
 
+<img src=".\media\snapatac_output2.png" alt="1" style="zoom:100%;" />
+
 The plot can be saved to a file using the `out_file` parameter. The suffix of the filename will used to determined the output format.
 
 ```python
 snap.pl.umap(data, color='leiden', show=False, out_file="umap.pdf", height=500)
 snap.pl.umap(data, color='leiden', show=False, out_file="umap.html", height=500)
 ```
-<img src=".\media\snapatac_output2.png" alt="1" style="zoom:100%;" />
