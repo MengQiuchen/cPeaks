@@ -21,6 +21,8 @@ The basic information and properties of cPeaks can be found in [cPeaks_info.tsv]
 
 ## Map sequencing reads (BAM/fragments.tsv/.bed) to cPeaks
 
+at map2cpeaks folder, just download it and use it.
+
 ### Version
 Python (>=3.7)
 
@@ -34,25 +36,34 @@ tqdm
 joblib
 ```
 
-### Method 1: Map the sequencing reads (BAM/fragments.tsv) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
+### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
  
 ```
-usage: python main.py [--fragment_path your_fragment.tsv.gz]
-                      [--barcode_path your_bar.txt]
-                      [--output your_output_folder]
+usage:
 
- --fragment_path, -f: the input file is fragment.gz file, transfer fragment to cPeak reference
+1.
+
+
+cd map2cpeaks
+
+
+2. 
+
+python main.py --fragment_path path/to/your_fragment.tsv.gz
+               
+--fragment_path, -f: the input file must be *.tsv.gz file, transfer fragment to cPeak reference
  
 optional arguments:
 
- --help,-h:           show this help message
- --barcode_path, -b:  barcode file given, the code will use the barcode in the file or the code will use all barcodes in the fragment.gz file
- --type_saved，-t:    output file is mtx file or h5ad former, Default to .mtx
- --output, -o:        output folder, Default to ./res
+ --help, -h:          show this help message
+ --barcode_path, -b:  barcode file is given, the code will use the barcode in the file or the code will use all barcodes in the fragment.tsv.gz file
+ --type_saved, -t:    output file is mtx file or h5ad former, Default to .mtx
+ --output, -o:        output folder, Default to ./map2cpeaks_result
+ --output_name:       name of output files, Default to cell-cpeaks.
+ --num_cores, -n:     number of cores to use, Default to 10.
  --reference:         cPeak version, hg38 or hg19, Default to hg38.
-
 ```
-note: The observed part only use observed data as reference, the predicted part only use predicted cPeaks by DeepCNN as reference, and all is the combination of both.
+
 
 ### Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
 
@@ -61,7 +72,7 @@ note: The observed part only use observed data as reference, the predicted part 
 ```
 usage: python main.py [--bed_path feature.bed]
 
---bed_path, -bed: the input feature.bed file, for example: MACS2calledPeaks.bed.
+--bed_path, -bed: the input feature.bed file, for example, MACS2calledPeaks.bed.
 ```
 
 ## Contact us
