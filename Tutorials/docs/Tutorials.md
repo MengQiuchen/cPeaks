@@ -1,9 +1,8 @@
+# cPeak Tutorials
+
 Compiled date: 25th Feb
 
 Source: [Tutorials/README.md](https://github.com/MengQiuchen/cPeaks/blob/dev-tutorials/Tutorials/README.md)
-
-
-# cPeak Tutorials
 
 ## 1. What is cPeak?
 
@@ -78,13 +77,11 @@ pip install snapatac2==2.5
 For more installation options, please refer to [SnapATAC2 installation instructions](https://kzhang.org/SnapATAC2/install.html).
 
 
-#### Utilize cPeak with SnapATAC2
+#### Integrating cPeak with SnapATAC2
 
 The example codes and descriptions in this section are adapted from [SnapATAC2 standard pipeline](https://kzhang.org/SnapATAC2/tutorials/pbmc.html). You can download the code file here: [cPeak_SnapATAC2.ipynb](https://TODO). TODO: add file link
 
-
-[testtest](media/cPeak_SnapATAC2.md ':include')
-
+[cPeak_SnapATAC2](media/cPeak_SnapATAC2.md ':include')
 
 ### <a id="method2"></a>3.2 ArchR
 
@@ -99,83 +96,48 @@ devtools::install_github("GreenleafLab/ArchR", ref="master", repos = BiocManager
 If you encounter any installation issues, please refer to [ArchR installation instructions]( https://www.archrproject.com/).
 
 
-#### Utilize cPeak with ArchR
+#### Integrating cPeak with ArchR
 
-Code references to https://www.archrproject.com/bookdown/index.html
+The example codes and descriptions in this section are adapted from [A Brief Tutorial of ArchR](https://www.archrproject.com/articles/Articles/tutorial.html). You can download the code file here: [cPeaks_ArchR.ipynb](https://TODO). TODO: add file link
 
-```r
-library(ArchR)
-set.seed(1)
-addArchRThreads(threads = 90) 
-library(GenomicRanges)
-library(tidyverse)
-library(dplyr)
-addArchRGenome(‘hg19')
+[cPeak_ArchR](media/cPeaks_ArchR.md ':include')
 
-cpeaks = read_table('/nfs/mqc/Consensus_peak/code/cpeaks/all/hg19/cpeaks.v3.simple.bed',col_names = F)
-cpeaks.gr <- GRanges(seqnames = cpeaks$X1,
-              ranges = IRanges(cpeaks$X2, cpeaks$X3))
-get_cluster = function(fragement_path,output.name,num_cluster,gr=NULL,ref = 'hg19'){
-    addArchRGenome(ref)
-    if (length(list.files(fragement_path)) == 0 & (!endsWith(fragement_path,'tsv.gz'))){
-        print("input should be tsv.gz or list of tsv.gz")
-        return()
-    }
-    if (length(list.files(fragement_path))>0){
-        file_list <- list.files(fragement_path, pattern = "fragments.tsv.gz$", full.names = TRUE)
-        print(paste0('there are ',length(file_list),' fragments files'))
-        file_name <- lapply(file_list, function(x) {
-          tmp <- strsplit(x, '/')[[1]]
-          tmp[length(tmp)]
-        })
-    }
-	else{
-        file_list = fragement_path
-        print(paste0('there are 1 files: ',fragement_path))
-        tmp <- strsplit(fragement_path, '/')[[1]]
-        file_name = tmp[length(tmp)]   
-    }
-    ArrowFiles <- createArrowFiles(
-      inputFiles = file_list,
-      sampleNames = file_name,
-      minTSS = 0, #Dont set this too high because you can always increase later
-      minFrags = 0, 
-      addTileMat = TRUE,
-      addGeneScoreMat = TRUE
-    )
-    proj =  ArchRProject(
-      ArrowFiles = ArrowFiles, 
-      outputDirectory = output.name,
-      copyArrows = F #This is recommened so that you maintain an unaltered copy for later usage.
-    )
-    #proj <- filterDoublets(ArchRProj = proj)
-    if (!is.null(gr)){
-        proj = addFeatureMatrix(proj,features = gr,matrixName='FeatureMatrix')
-        proj <- addIterativeLSI(ArchRProj = proj, useMatrix = "FeatureMatrix", name = "IterativeLSI")   
-    }
-    else{
-        proj <- addIterativeLSI(ArchRProj = proj, useMatrix = "TileMatrix", name = "IterativeLSI")    
-    }
-    proj <- addClusters(input = proj, reducedDims = "IterativeLSI",maxClusters=num_cluster)   
-    proj <- addUMAP(ArchRProj = proj, reducedDims = "IterativeLSI") 
-    p1 <- plotEmbedding(ArchRProj = proj, colorBy = "cellColData", name = "Sample", embedding = "UMAP")    
-    p2 <- plotEmbedding(ArchRProj = proj, colorBy = "cellColData", name = "Clusters", embedding = "UMAP")  
-    ggAlignPlots(p1, p2, type = "h")
-    rname = row.names(getCellColData(proj))
-    cluster = unlist(proj$Clusters%>%lapply(function(x){strsplit(x,'C')[[1]][2]%>%as.numeric}))
-    pre = cbind(rname,cluster)%>%as.data.frame  
-    pre$cluster = as.numeric(pre$cluster)   
-    #saveArchRProject(ArchRProj = proj, outputDirectory = paste0(output.name,'_save'), load = FALSE)
-    return(pre)
-}
-library(parallel)
-res = get_cluster("sort.HSC.fragments.tsv.gz",'HSC_all',num_cluster = 10,gr=cpeaks.gr)
+### <a id="method1"></a>3.3 Run Python Script Manually 
 
+In this section, we will demonstrate how to map sequencing reads to cPeaks using Map2cpeak. Begin by navigating to the 'map2cpeaks' directory. Once there, download and run the software. A demo is also available in the 'demo' folder for trial purposes.
+
+#### Prerequisites
+
+- Python version 3.7 or higher
+- Required Packages: numpy, gzip and tqdm. 
+Ensure these packages are installed before proceeding.
+
+#### Install
+
+```bash
+git clone https://github.com/MengQiuchen/cPeaks.git
 ```
 
-## <a id="method1"></a>Run Python Script Manually 
+#### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx)
 
-### <a id="param"></a>main.py Parameters
+Generate a cell-by-cPeak matrix (.mtx) by mapping the sequencing reads (fragments.tsv.gz) for each sample or cell.
+
+**Important Note**: A minimum of 20GB of memory is required to run this process (`--mode 'normal'`). For improved speed, with at least 30GB of memory, you may activate the default performance mode.
+
+##### Usage Instructions:
+
+1. Navigate to the `map2cpeaks` directory:
+```bash
+cd map2cpeaks
+```
+
+2. To map your sequencing reads:
+```bash
+python main.py -f path/to/your_fragment.tsv.gz
+```
+- `--fragment_path`, `-f`: Input file path (must be a .gz file).
+
+##### <a id="param"></a>Arguments
 
 | Parameter | Default | Description |
 | ------ | ------ | ------ | 
@@ -187,35 +149,39 @@ res = get_cluster("sort.HSC.fragments.tsv.gz",'HSC_all',num_cluster = 10,gr=cpea
 | output_name | cell-cpeaks | Name of output files. |
 | num_cores | 10 |  Number of cores to use. |
 
+##### Example:
 
-### Version
-Python (>=3.7)
-
-### Requirments
-
-```
-numpy
-gzip
-tqdm
-```
-
-### Method 1: Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
-
-Map the sequencing reads (fragments.tsv.gz) in each sample/cell to generate cell-by-cPeak matrix (.mtx/.h5ad)
+To run a demo mapping:
 ```bash
-usage:
-
-
-The output file contains a barcode.txt and an mtx file that stores the matrix of map results.
-
-### Method 2. Directly map the pre-identified features like peaks to cPeaks (NOT recommand)
-
-**This is not a good idea.** It may lose information in the genomic regions which are not included in pre-identfied features. Also, for bulk ATAC-seq data, the quantification of each cPeak is inaccurate.
-
-```bash
-usage: python main.py [--bed_path feature.bed]
-
---bed_path, -bed: the input feature.bed file, for example, MACS2calledPeaks.bed.
+python main.py -f demo/test_fragment.tsv.gz
 ```
 
+To use a provided barcode mapping (ensure 'barcodes.txt' is included in the fragments):
+```bash
+python main.py -f demo/test_fragment.tsv.gz -b demo/test_barcodes.txt --reference hg19
+```
 
+The resulting output will include a `barcode.txt` and a `.mtx` file housing the mapping matrix.
+
+To use hg19 as a reference of mapping, you can run:
+```bash
+python main.py -f demo/test_fragment.tsv.gz --reference hg19
+```
+
+#### Method 2: Mapping Pre-Identified Features to cPeaks (Not Recommended)
+
+**Caution**: This method can result in loss of genomic information as it only considers the pre-identified features. Moreover, the quantification of cPeaks may not be accurate for bulk ATAC-seq data.
+
+##### Usage for Pre-Identified Feature Mapping:
+
+```bash
+python main.py [--bed_path feature.bed]
+```
+- `--bed_path`, `-bed`: Input the `.bed` file of features, such as `MACS2calledPeaks.bed`.
+
+Remember to priorly adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
+
+
+# Contact
+
+Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
