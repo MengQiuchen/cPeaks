@@ -45,7 +45,7 @@ For more information, you can download the cPeaks resource files from the follow
 | ReMap_ID | The overlapped ReMap ID of this cPeak, names with "chr_start_end" in hg38 reference. |
 | CATLAS_ID | The overlapped CATLAS cCREs of this cPeak, names with "chr_start_end" in hg38 reference. |
 
-## 2. Usages in a Nutshell
+## 2. Quick Start Guide
 
 <img src=".\media\methods.png" alt="1" style="zoom:100%;" />
 
@@ -80,7 +80,7 @@ cPeaks simplifies the peak-calling step by providing a ready-to-use reference. I
     [See more about arguments for main.py](#arguments).
 
 
-## <a id="detail"></a>3. Usages in Detail
+## <a id="detail"></a>3. Comprehensive Guide
 
 SnapATAC2 and ArchR are two popular packages for scATAC-seq data analysis. Integrating cPeaks into the analysis workflow of these packages is straightforward and seamless. Additionally, we provide an easy-to-use Python script for transforming fragment files into cell-by-peak matrices. In the following sections, we present detailed code examples and explanations for three scenarios corresponding to the aforementioned cases.
 
@@ -162,7 +162,7 @@ python main.py -f path/to/your_fragment.tsv.gz
 
 ##### <a id="arguments"></a>Input Arguments
 
-| Argument | Alternate display name | Default | Description |
+| Argument | Alternate Display Name | Default | Description |
 | --------- | ---------------------- | ------- | ----------- | 
 | fragment_path | -f | None | Input file path (must be a .gz file) |
 | barcode_path | -b |None | Specify a file containing barcodes to be used. If not specified, all barcodes in the fragment file will be used. |
@@ -204,7 +204,7 @@ python main.py [--bed_path feature.bed]
 
 ##### Input Arguments
 
-| Argument | Alternate display name | Default | Description |
+| Argument | Alternate Display Name | Default | Description |
 | --------- | ---------------------- | ------- | ----------- | 
 | bed_path | -bed | None | Input the .bed file of features, such as 'MACS2calledPeaks.bed'. |
 | reference |  | hg38 | Specify the cPeaks version, either 'hg38' or 'hg19'. |
@@ -216,12 +216,13 @@ You will get a matrix file `map2cpeak.bed` under the `output` folder.
 
 Remember to priorly adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
 
-# Reference & Contact
+## Reference
 
-[1]Zhang, K., Zemke, N. R., Armand, E. J. & Ren, B. (2024). A fast, scalable and versatile tool for analysis of single-cell omics data. Nature Methods, 1–11. https://doi.org/10.1038/s41592-023-02139-9
+[1] Zhang, K., Zemke, N. R., Armand, E. J. & Ren, B. (2024). A fast, scalable and versatile tool for analysis of single-cell omics data. Nature Methods, 1–11. https://doi.org/10.1038/s41592-023-02139-9
 
-[2]Granja JM, Corces MR et al., ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis. Nature Genetics (2021)
+[2] Granja JM, Corces MR et al., ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis. Nature Genetics (2021)
 
-[3]Meng Q, Wu X, Li C, et al. The full set of potential open regions (PORs) in the human genome defined by consensus peaks of ATAC-seq data. doi:10.1101/2023.05.30.542889
+[3] Meng Q, Wu X, Li C, et al. The full set of potential open regions (PORs) in the human genome defined by consensus peaks of ATAC-seq data. doi:10.1101/2023.05.30.542889
 
+## Contact
 Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
