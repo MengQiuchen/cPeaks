@@ -77,7 +77,7 @@ cPeaks simplifies the peak-calling step by providing a ready-to-use reference. I
     ```
     After running `main.py` as above, you will get a matrix file `cell_cpeaks.mtx` and a text file `barcodes.txt` under a newly created folder `map2cpeaks_result`.
 
-    [See more about paramters for main.py](#param).
+    [See more about arguments for main.py](#arguments).
 
 
 ## <a id="detail"></a>3. Usages in Detail
@@ -86,9 +86,7 @@ SnapATAC2 and ArchR are two popular packages for scATAC-seq data analysis. Integ
 
 * [SnapATAC2](#method1): A Python/Rust package for single-cell epigenomics analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
 * [ArchR](#method2): A full-featured R package for processing and analyzing single-cell ATAC-seq data. Click the [link](https://github.com/GreenleafLab/ArchR) for detailed information.
-* [Run Python Script Manually](#method3): Run python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/main.py) to transform fragment files to cPeaks-based data matrics, which can be use to downstream analysis steps.
-
-
+* [Run Python Script Manually](#method3): Run python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/map2cpeak/main.py) to transform fragment files to cPeaks-based data matrics, which can be use to downstream analysis steps.
 
 ### <a id="method1"></a>3.1 SnapATAC2
 
@@ -162,9 +160,9 @@ cd map2cpeak
 python main.py -f path/to/your_fragment.tsv.gz
 ```
 
-##### <a id="param"></a>Input Arguments
+##### <a id="arguments"></a>Input Arguments
 
-| Parameter | Alternate display name | Default | Description |
+| Argument | Alternate display name | Default | Description |
 | --------- | ---------------------- | ------- | ----------- | 
 | fragment_path | -f | None | Input file path (must be a .gz file) |
 | barcode_path | -b |None | Specify a file containing barcodes to be used. If not specified, all barcodes in the fragment file will be used. |
@@ -206,7 +204,7 @@ python main.py [--bed_path feature.bed]
 
 ##### Input Arguments
 
-| Parameter | Alternate display name | Default | Description |
+| Argument | Alternate display name | Default | Description |
 | --------- | ---------------------- | ------- | ----------- | 
 | bed_path | -bed | None | Input the .bed file of features, such as 'MACS2calledPeaks.bed'. |
 | reference |  | hg38 | Specify the cPeaks version, either 'hg38' or 'hg19'. |
