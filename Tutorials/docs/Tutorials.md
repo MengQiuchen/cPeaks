@@ -6,7 +6,7 @@ Source: [docs/Tutorials.md](https://github.com/MengQiuchen/cPeaks/blob/main/Tuto
 
 ### Introduction
 
-cPeaks is a unified reference across cell types for ATAC-seq or scATAC-seq data, enhancing downstream analysis, particularly for cell annotation and rare cell type detection.
+cPeaks is a unified reference across cell types for ATAC-seq or scATAC-seq data, improving downstream analysis, particularly in cell annotation and rare cell type detection.
 
 <img src=".\media\Cover.png" alt="1" width="500" style="zoom:100%;" />
 
@@ -25,13 +25,13 @@ We will utilize the two downloaded files in the upcoming tutorials.
 
 #### Detailed data
 
-For more information, you can download the cPeaks resource files from the following links: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/6460b32917224d32aef1/?dl=1). It contained the basic information, cPeaks annotation, and integration with biological data. It includes 15 columns:
+For more detailed information, you can download the cPeaks resource files from the following link: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/6460b32917224d32aef1/?dl=1). The file contains basic information, cPeaks annotation, and integration with biological data. It consists of 15 columns, each providing specific details about the cPeaks:
 
 | Column Name | Column Description |
 | ----------- | ------------------ |
 | ID | The ID of this cPeak. We employed a 14-character string as the unique ID for each cPeak. cPeak ID begins with POR for potential open regions, then HS for human, and ends with nine-digital number. For example, the first cPeak was encoded as PORHS000000001. |
-| chr_hg38 | The chromosome of this cPeak in hg38. |
-| source | The source of this cPeak: “observed” or “predicted”. |
+| chr_hg38 | The chromosome of this cPeak in hg38 reference. |
+| source | The source of this cPeak: "observed" or "predicted". |
 | start_hg38 | Start positions of this cPeak in hg38 reference. |
 | end_hg38 | End positions of this cPeak in hg38 reference. |
 | housekeeping | The housekeeping status, whether this cPeak is open in almost all datasets, "TRUE" or "FALSE". |
@@ -50,23 +50,24 @@ For more information, you can download the cPeaks resource files from the follow
 <img src=".\media\methods.png" alt="1" style="zoom:100%;" />
 
 
-cPeaks simplifies the peak-calling step by providing a ready-to-use reference. If you are familiar with SnapATAC2, ArchR or python, this part we will help you get started with cPeaks very quickly. Otherwise if you get confused about anything in this part, please refer to [detailed tutorials](#detail).
+cPeaks simplifies the peak-calling step by providing a ready-to-use reference. If you are familiar with SnapATAC2, ArchR or Python, this section will help you quickly get started with cPeaks. However, if you encounter any confusion, please refer to [detailed tutorials](#detail).
 
 - SnapATAC2
     ```python
-    # read cPeaks file cpeaks_hg19.bed or cpeaks_hg38.bed
+    # Read cPeaks file cpeaks_hg19.bed or cpeaks_hg38.bed
     cpeaks_path = 'YOUR_PATH/cpeaks_hg38.bed'
     with open(cpeaks_path) as cpeaks_file:
         cpeaks = cpeaks_file.read().strip().split('\n')
         cpeaks = [peak.split('\t')[0] + ':' + peak.split('\t')[1] + '-' + peak.split('\t')[2] for peak in cpeaks]
-    # set parameter use_rep to user cPeaks as mapping reference
+    # Set parameter use_rep to 'cpeaks' as mapping reference. 'data' is your AnnData object.
     data = snap.pp.make_peak_matrix(data, use_rep=cpeaks)
     ```
 - ArchR
     ```r
-    # read cPeaks file cpeaks_hg19.bed or cpeaks_hg38.bed
+    # Read cPeaks file cpeaks_hg19.bed or cpeaks_hg38.bed
     cpeaks <- read_table('YOUR_PATH/cpeaks_hg19.bed', col_names = F)
     cpeaks.gr <- GRanges(seqnames = cpeaks$X1, ranges = IRanges(cpeaks$X2, cpeaks$X3))
+    # Set parameter 'features' to cpeaks.gr. 'proj' is your ArchRProject object.
     proj <- addFeatureMatrix(proj, features = cpeaks.gr, matrixName = 'FeatureMatrix')
     ```
 - Run Python Script Manually
@@ -75,24 +76,23 @@ cPeaks simplifies the peak-calling step by providing a ready-to-use reference. I
     cd cPeaks/map2cpeak
     python main.py --fragment_path PATH/to/YOUR_fragment.tsv.gz --output map2cpeaks_result
     ```
-    After running `main.py` as above, you will get a matrix file `cell_cpeaks.mtx` and a text file `barcodes.txt` under a newly created folder `map2cpeaks_result`.
+    After running `main.py` as above, you will get a matrix file `cell_cpeaks.mtx` and a text file `barcodes.txt` within a newly created folder named `map2cpeaks_result`.
 
-    [See more about arguments for main.py](#arguments).
-
+    [Learn more about the arguments for main.py](#arguments).
 
 ## <a id="detail"></a>3. Comprehensive Guide
 
-SnapATAC2 and ArchR are two popular packages for scATAC-seq data analysis. Integrating cPeaks into the analysis workflow of these packages is straightforward and seamless. Additionally, we provide an easy-to-use Python script for transforming fragment files into cell-by-peak matrices. In the following sections, we present detailed code examples and explanations for three scenarios corresponding to the aforementioned cases.
+SnapATAC2 and ArchR stand out as two popular packages for scATAC-seq data analysis. Integrating cPeaks into the analysis workflow of these packages is straightforward and seamless. Additionally, we provide an easy-to-use Python script for transforming fragment files into cell-by-peak matrices. In the following sections, we present detailed code examples and explanations for three scenarios corresponding to the aforementioned cases.
 
 * [SnapATAC2](#method1): A Python/Rust package for single-cell epigenomics analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
 * [ArchR](#method2): A full-featured R package for processing and analyzing single-cell ATAC-seq data. Click the [link](https://github.com/GreenleafLab/ArchR) for detailed information.
-* [Run Python Script Manually](#method3): Run python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/map2cpeak/main.py) to transform fragment files to cPeaks-based data matrics, which can be use to downstream analysis steps.
+* [Run Python Script Manually](#method3): Run Python script [main.py](https://github.com/MengQiuchen/cPeaks/blob/main/map2cpeak/main.py) to obtain cPeaks-based data matrics from fragment files, facilitating downstream analysis steps.
 
 ### <a id="method1"></a>3.1 SnapATAC2
 
 #### Install SnapATAC2
 
-SnapATAC2 requires python>=3.8. There have been changes in the functions and some function parameters between versions 2.4 and 2.5 of SnapATAC2. We recommend installing the 2.5 or higher versions, for compatibility and access to the most recent features and improvements.
+SnapATAC2 requires Python>=3.8. There have been changes in the functions and some function parameters between versions 2.4 and 2.5 of SnapATAC2. We recommend installing the 2.5 or higher versions, for compatibility and access to the most recent features and improvements.
 
 ```bash
 pip install snapatac2==2.5
@@ -164,14 +164,14 @@ python main.py -f path/to/your_fragment.tsv.gz
 
 | Argument | Alternate Display Name | Default | Description |
 | --------- | ---------------------- | ------- | ----------- | 
-| fragment_path | -f | None | Input file path (must be a .gz file) |
-| barcode_path | -b |None | Specify a file containing barcodes to be used. If not specified, all barcodes in the fragment file will be used. |
-| reference |  | hg38 | Specify the cPeaks version, either 'hg38' or 'hg19'. |
-| output | -o | map2cpeaks_result | Designate an output folder name. |
+| fragment_path | -f | None | Path to the input fragment file (must be a .gz file). |
+| barcode_path | -b |None | Path to a file containing barcodes to be used. If not specified, all barcodes in the fragment file will be used. |
+| reference |  | hg38 | Specify the cPeaks version: 'hg38' or 'hg19'. |
+| output | -o | map2cpeaks_result | Name of the output folder. |
 
 ##### Output
 
-You will get a matrix file `cell_cpeaks.mtx` and a text file `barcodes.txt` under the `output` folder.
+A new `output` folder will be created in the current directory, containing a matrix file `cell_cpeaks.mtx` and a text file `barcodes.txt`.
 
 ##### Example:
 
@@ -199,20 +199,20 @@ python main.py -f demo/test_fragment.tsv.gz --reference hg19
 ##### Usage for Pre-Identified Feature Mapping:
 
 ```bash
-python main.py [--bed_path feature.bed]
+python main.py --bed_path PATH/to/YOUR_feature.bed
 ```
 
 ##### Input Arguments
 
 | Argument | Alternate Display Name | Default | Description |
 | --------- | ---------------------- | ------- | ----------- | 
-| bed_path | -bed | None | Input the .bed file of features, such as 'MACS2calledPeaks.bed'. |
-| reference |  | hg38 | Specify the cPeaks version, either 'hg38' or 'hg19'. |
-| output | -o | map2cpeaks_result | Designate an output folder name. |
+| bed_path | -bed | None | Path to the input .bed file of features (e.g., 'MACS2calledPeaks.bed'). |
+| reference |  | hg38 | Specify the cPeaks version: 'hg38' or 'hg19'. |
+| output | -o | map2cpeaks_result | Name of the output folder. |
 
 ##### Output
 
-You will get a matrix file `map2cpeak.bed` under the `output` folder.
+A new `output` folder will be created in the current directory, containing a bed file `map2cpeak.bed`.
 
 Remember to priorly adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
 
