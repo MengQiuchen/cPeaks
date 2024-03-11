@@ -8,7 +8,7 @@ Source: [docs/Tutorials.md](https://github.com/MengQiuchen/cPeaks/blob/main/Tuto
 
 cPeaks is a unified reference across cell types for ATAC-seq or scATAC-seq data, improving downstream analysis, particularly in cell annotation and rare cell type detection.
 
-<img src=".\media\Cover.png" alt="1" width="500" style="zoom:100%;" />
+<img src=".\media\introduction.png" alt="1" width="500" style="zoom:100%;" />
 
 ### Download
 
@@ -135,6 +135,14 @@ In this section, we will demonstrate how to map sequencing reads to cPeaks using
 - Python version 3.7 or higher
 - Required packages: numpy, gzip and tqdm. 
 Ensure these packages are installed before proceeding.
+<!-- 
+To know time and memory consumption, we test the code under the following circumstances:
+- System & version: 
+- cpu memory and cores:
+- dataset: 
+
+
+<img src=".\media\time_consuming.png" alt="1" width=400 style="zoom:100%;" /> <img src=".\media\memory_consuming.png" alt="1" width=400 style="zoom:100%;" /> -->
 
 #### Install
 
@@ -216,7 +224,7 @@ A new `output` folder will be created in the current directory, containing a bed
 
 Remember to priorly adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
 
-## Reference
+## 4. Reference
 
 [1] Zhang, K., Zemke, N. R., Armand, E. J. & Ren, B. (2024). A fast, scalable and versatile tool for analysis of single-cell omics data. Nature Methods, 1–11. https://doi.org/10.1038/s41592-023-02139-9
 
@@ -224,5 +232,5 @@ Remember to priorly adjust your operational environment according to the system 
 
 [3] Meng Q, Wu X, Li C, et al. The full set of potential open regions (PORs) in the human genome defined by consensus peaks of ATAC-seq data. doi:10.1101/2023.05.30.542889
 
-## Contact
+## 5. Contact
 Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
