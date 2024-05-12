@@ -1,4 +1,4 @@
-Compiled date: 11th Mar 2024
+Compiled date: 12th May 2024
 
 Source: [docs/Tutorials.md](https://github.com/MengQiuchen/cPeaks/blob/main/Tutorials/docs/Tutorials.md)
 
@@ -6,7 +6,7 @@ Source: [docs/Tutorials.md](https://github.com/MengQiuchen/cPeaks/blob/main/Tuto
 
 ### Introduction
 
-cPeaks is a unified reference across cell types for ATAC-seq or scATAC-seq data, improving downstream analysis, particularly in cell annotation and rare cell type detection.
+cPeaks serves as a unified reference for different cell types for ATAC-seq or scATAC-seq data, enhancing downstream analysis, particularly in cell annotation and rare cell type detection.
 
 <img src=".\media\introduction.png" alt="1" width="500" style="zoom:100%;" />
 
@@ -14,7 +14,7 @@ cPeaks is a unified reference across cell types for ATAC-seq or scATAC-seq data,
 
 #### Simple data
 
-cPeaks reference files can be obtained from the following links: [hg19 file](https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1). Alternatively, you can download them using the following commands:
+cPeaks reference files are available at the following links: [hg19 file](https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1). Alternatively, you can download them using the following commands:
 
 ```bash
 wget -O YOUR_PATH/cpeaks_hg19.bed https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1
@@ -25,7 +25,7 @@ We will utilize the two downloaded files in the upcoming tutorials.
 
 #### Detailed data
 
-For more detailed information, you can download the cPeaks resource files from the following link: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/6460b32917224d32aef1/?dl=1). The file contains basic information, cPeaks annotation, and integration with biological data. It consists of 15 columns, each providing specific details about the cPeaks:
+For additional details, download the cPeaks resource files from the following link: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/6460b32917224d32aef1/?dl=1). The file contains basic information, cPeaks annotation, and integration with biological data. It consists of 15 columns, each providing specific details about the cPeaks:
 
 | Column Name | Column Description |
 | ----------- | ------------------ |
@@ -50,7 +50,7 @@ For more detailed information, you can download the cPeaks resource files from t
 <img src=".\media\methods.png" alt="1" style="zoom:100%;" />
 
 
-cPeaks simplifies the peak-calling step by providing a ready-to-use reference. If you are familiar with SnapATAC2, ArchR or Python, this section will help you quickly get started with cPeaks. However, if you encounter any confusion, please refer to [detailed tutorials](#detail).
+cPeaks eliminates the need for the peak-calling step by providing a ready-to-use reference. If you are familiar with SnapATAC2, ArchR or Python, this section will help you quickly get started with cPeaks. However, if you have any questions, please refer to [detailed tutorials](#detail).
 
 - SnapATAC2
     ```python
@@ -82,7 +82,7 @@ cPeaks simplifies the peak-calling step by providing a ready-to-use reference. I
 
 ## <a id="detail"></a>3. Comprehensive Guide
 
-SnapATAC2 and ArchR stand out as two popular packages for scATAC-seq data analysis. Integrating cPeaks into the analysis workflow of these packages is straightforward and seamless. Additionally, we provide an easy-to-use Python script for transforming fragment files into cell-by-peak matrices. In the following sections, we present detailed code examples and explanations for three scenarios corresponding to the aforementioned cases.
+SnapATAC2 and ArchR stand out as two popular packages for scATAC-seq data analysis. Integrating cPeaks into the analysis workflow of these packages is straightforward and seamless. Additionally, we provide an user-friendly Python script for transforming fragment files into cell-by-peak matrices. In the following sections, we present detailed code examples and explanations for three scenarios corresponding to the aforementioned cases.
 
 * [SnapATAC2](#method1): A Python/Rust package for single-cell epigenomics analysis. Click the [link](https://github.com/kaizhang/SnapATAC2) for detailed information.
 * [ArchR](#method2): A full-featured R package for processing and analyzing single-cell ATAC-seq data. Click the [link](https://github.com/GreenleafLab/ArchR) for detailed information.
@@ -128,7 +128,7 @@ The example codes and descriptions in this section are adapted from [A Brief Tut
 
 ### <a id="method3"></a>3.3 Run Python Script Manually 
 
-In this section, we will demonstrate how to map sequencing reads to cPeaks using Map2cPeak. Begin by navigating to the 'map2cpeak' directory. Once there, download and run the software. A demo is also available in the 'demo' folder for trial purposes.
+In this section, we will illustrate how to map sequencing reads to cPeaks using Map2cPeak. Begin by navigating to the 'map2cpeak' directory. Once there, download and run the software. A demo is also available in the 'demo' folder for trial purposes.
 
 #### Prerequisites
 
@@ -137,7 +137,7 @@ In this section, we will demonstrate how to map sequencing reads to cPeaks using
 Ensure these packages are installed before proceeding.
 
 <!-- 
-To know time and memory consumption, we test the code under the following circumstances:
+To know time and memory consumption, we tested the code under the following conditions:
 - System & version: 
 - cpu memory and cores:
 - dataset: 
@@ -194,7 +194,7 @@ To use a provided barcode mapping (ensure 'barcodes.txt' is included in the frag
 python main.py -f demo/test_fragment.tsv.gz -b demo/test_barcodes.txt --reference hg19
 ```
 
-The resulting output will include a `barcode.txt` and a `.mtx` file housing the mapping matrix.
+The resulting output includes a `barcode.txt` and a `.mtx` file housing the mapping matrix.
 
 To use hg19 as a reference of mapping, you can run:
 ```bash
@@ -223,7 +223,7 @@ python main.py --bed_path PATH/to/YOUR_feature.bed
 
 A new `output` folder will be created in the current directory, containing a bed file `map2cpeak.bed`.
 
-Remember to priorly adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
+Remember to pre-adjust your operational environment according to the system requirements and ensure you’ve properly understood the process to achieve optimal outcomes.
 
 ## 4. Reference
 
