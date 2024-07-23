@@ -1,4 +1,4 @@
-Compiled date: 12th May 2024
+Compiled date: 23th July 2024
 
 Source: [docs/Tutorials.md](https://github.com/MengQiuchen/cPeaks/blob/main/Tutorials/docs/Tutorials.md)
 
@@ -231,7 +231,7 @@ Remember to pre-adjust your operational environment according to the system requ
 
 [2] Granja JM, Corces MR et al., ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis. Nature Genetics (2021)
 
-[3] Meng Q, Wu X, Li C, et al. The full set of potential open regions (PORs) in the human genome defined by consensus peaks of ATAC-seq data. doi:10.1101/2023.05.30.542889
+[3] Meng Q, Wu X, et al. Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data. BioRxiv [Preprint](https://doi.org/10.1101/2023.05.30.542889.)
 
 ## 5. Contact
 Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
