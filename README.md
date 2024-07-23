@@ -2,11 +2,11 @@
 
 cPeaks serves as a unified reference for different cell types for scATAC-seq data, enhancing downstream analysis, particularly in cell annotation and rare cell type detection.
 
-<img src=".\Tutorial\media\methods.png" alt="1" style="zoom:100%;" />
+<img src=".\Tutorials\media\methods.png" alt="1" style="zoom:100%;" />
 
 ## cPeaks Download
 
-We released cPeaks (.bed format) with [GRCh37/hg19](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg19.bed) and [GRCh38/hg38](https://github.com/MengQiuchen/cPeaks/blob/main/cPeaks_hg38.bed) version.
+We released cPeaks (.bed format) with [GRCh37/hg19](https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1) and [GRCh38/hg38](https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1) version.
 
 The basic information and properties of cPeaks can be found in [cPeaks_info.tsv](https://cloud.tsinghua.edu.cn/f/4422592d373948589dc4/).
 
@@ -47,15 +47,16 @@ cPeaks eliminates the need for the peak-calling step by providing a ready-to-use
   ```
   
     After running `main.py` as above, you will get a matrix file `cell_cpeaks.mtx` and a text file `barcodes.txt` within a newly created folder named `map2cpeaks_result`.
-    [Learn more about the arguments for main.py](./Tutorials/docs/Tutorials.md#arguments).
+    
+    [Learn more about the arguments for main.py](https://mengqiuchen.github.io/cPeaks/Tutorials/#/?id=arguments).
 
 ### <a id="detail"></a>Comprehensive Guide
 
-Please refer to [detailed tutorials](#detail).
+Please refer to [detailed tutorials](https://mengqiuchen.github.io/cPeaks/Tutorials/#/?id=_3-comprehensive-guide).
 
 ## Citation
 
-Meng Q, Wu X, et al. Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data. BioRxiv [Preprint](https://doi.org/10.1101/2023.05.30.542889.)
+Meng Q, Wu X, et al. Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data. Preprint at *bioRxiv* [Preprint](https://doi.org/10.1101/2023.05.30.542889)(2023).
 
 ## Contact
 

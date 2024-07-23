@@ -227,11 +227,11 @@ Remember to pre-adjust your operational environment according to the system requ
 
 ## 4. Reference
 
-[1] Zhang, K., Zemke, N. R., Armand, E. J. & Ren, B. (2024). A fast, scalable and versatile tool for analysis of single-cell omics data. Nature Methods, 1–11. https://doi.org/10.1038/s41592-023-02139-9
+[1] Zhang, Kai, et al. "A fast, scalable and versatile tool for analysis of single-cell omics data." Nature methods 21.2 (2024): 217-227.
 
-[2] Granja JM, Corces MR et al., ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis. Nature Genetics (2021)
+[2] Granja, Jeffrey M., et al. "ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis." Nature genetics 53.3 (2021): 403-411.
 
-[3] Meng Q, Wu X, et al. Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data. BioRxiv [Preprint](https://doi.org/10.1101/2023.05.30.542889.)
+[3] Meng, Qiuchen, et al. "Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data." bioRxiv (2023): 2023-05. https://doi.org/10.1101/2023.05.30.542889
 
 ## 5. Contact
 Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
