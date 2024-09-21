@@ -1,17 +1,13 @@
 # python 
-# 2024-3-8
+# 2024-9-13
 # @auther : Xinze Wu
 
 import os
 import sys
 import gzip
-# import anndata
 import argparse
-# import pandas as pd
 import numpy as np
-# import scanpy as sc
 from tqdm import tqdm
-# from scipy.io import mmread
 from collections import Counter,OrderedDict
 
 
@@ -26,8 +22,6 @@ def frag2mtx(fragment_path,savepath,barcode_path):
     
     if barcode_path == None:
 
-
-        # 打开压缩文件并且逐行读取
         with gzip.open(fragment_path, 'rt') as file:
             #          chr     start   end          barcode
             # array([['chr1', 181500, 181531, 'AAACAGCCAACCCTAA-1'],
@@ -67,17 +61,24 @@ def frag2mtx(fragment_path,savepath,barcode_path):
             bar2dic[i] = counter
             value_num+=len(counter)
 
-        fb = open(os.path.join(savepath,'barcodes.txt'),'w')
+        fb = open(os.path.join(savepath,output_name+'.barcodes.txt'),'w')
         fm = open(os.path.join(savepath,output_name+'.mtx'),'w')
 
-
         fm.write('%%MatrixMarket matrix coordinate real general\n')
-        fm.write(f'{len(b_peaks)} {len(bar2idx)} {value_num}\n')
+        fm.write(f'{len(bar2idx)} {len(b_peaks)} {value_num}\n')
+        
+        for idx, (i, dic) in enumerate(bar2dic.items()):
+            fb.write(i + '\n')
+            for c, v in dic.items():
+                fm.write(f'{idx+1} {c+1} {v}\n')
 
-        for idx,(i,dic) in enumerate(bar2dic.items()):
-            fb.write(i+'\n')
-            for c,v in dic.items():
-                fm.write(f'{c+1} {idx+1} {v}\n')
+        # fm.write('%%MatrixMarket matrix coordinate real general\n')
+        # fm.write(f'{len(b_peaks)} {len(bar2idx)} {value_num}\n')
+
+        # for idx,(i,dic) in enumerate(bar2dic.items()):
+        #     fb.write(i+'\n')
+        #     for c,v in dic.items():
+        #         fm.write(f'{c+1} {idx+1} {v}\n')
 
         fb.close()
         fm.close()
@@ -125,32 +126,6 @@ def frag2mtx(fragment_path,savepath,barcode_path):
         fm.close()
             
     print('fragment to mtx done!')
-
-
-# mtx, cpeaks, barcode to h5ad
-
-# def mtx2h5ad(mtx_path, barcode_path,savepath):
-
-#     '''
-#     mtx_path: path of mtx file
-#     savepath: path to save h5ad file
-#     '''
-#     print('read mtx')
-#     mtx = mmread(mtx_path).tocsr()
-    
-#     cpeaks_index = [f'{i[0]}:{i[1]}-{i[2]}' for i in b_peaks]
-    
-#     print('read barcodes')
-#     barcodes = [i.strip() for i in open(barcode_path).readlines()]
-    
-#     adata = sc.AnnData(X = mtx.T, obs =  {'barcodes':barcodes},var = {'cpeaks':cpeaks_index},dtype=mtx.dtype)
-#     adata.obs_names = barcodes
-    
-#     adata.write(os.path.join(savepath,output_name+'.h5ad'))
-    
-#     print('write to h5ad done!')
-
-# map bed to bed 
 
 def map_bed_to_bed(a_bed_path, b_peaks,savepath):
 
@@ -363,12 +338,6 @@ def cpeak_init(mode,reference):
         else:
             raise ValueError('reference must be hg38 or hg19')
     return dic_chr
- 
-
-
-
-    
-  
 
 # main 
 if __name__ == "__main__":
@@ -383,7 +352,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-   
     from time import time
     time_ = time()
 
@@ -454,20 +422,7 @@ if __name__ == "__main__":
         print("finished!")
         sys.exit(0)
     
-    # if save_type == 'mtx':
     frag2mtx(fragment_path,savepath,barcode_path)
-    # elif save_type == 'h5ad':
         
-    #     frag2mtx(fragment_path,savepath,barcode_path)
-    #     if barcode_path is None:
-    #         mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),os.path.join(savepath,'barcodes.txt'), savepath)
-    #     else:
-    #         mtx2h5ad(os.path.join(savepath,output_name+'.mtx'),barcode_path, savepath)
-            
-            
-    # else:
-    #     raise('--type_saved (-t) must be mtx or h5ad')
-        
-
     print('use time: ',round(time()-time_),"s")
     
