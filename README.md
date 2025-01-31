@@ -56,8 +56,8 @@ Please refer to [detailed tutorials](https://mengqiuchen.github.io/cPeaks/Tutori
 
 ## Citation
 
-Meng Q, Wu X, et al. Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data. Preprint at *bioRxiv* https://doi.org/10.1101/2023.05.30.542889 (2023).
+Meng Q, Wu X, et al. A generic reference defined by consensus peaks for scATAC-seq data analysis. Preprint at *bioRxiv* https://doi.org/10.1101/2023.05.30.542889 (2024).
 
 ## Contact
 
-Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
+Please reach out to Meng Qiuchen at qiuchenmeng@outlook.com if you encounter any issues or have any recommendations.
