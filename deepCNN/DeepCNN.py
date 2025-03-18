@@ -22,12 +22,14 @@ def setup_seed(seed):
     np.random.seed(seed)
     random.seed(seed)
     torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
     
     if torch.cuda.is_available():
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
-    
+        torch.manual_seed(seed)
 
+setup_seed(2023)
 
 # net
 
@@ -101,9 +103,6 @@ class DenseLayer(nn.Module):
         x = self.activation_fn(x)
         return x
 
-    
-
-
 
 
 def _col_round(x):
@@ -133,6 +132,7 @@ class DeepCNN(nn.Module):
         batch_norm: bool = True,
         dropout: float = 0.0,
         genomic_seq_length: int = 2000,
+        is_activate = True
     ):
         super().__init__()
 
@@ -185,7 +185,8 @@ class DeepCNN(nn.Module):
             activation_fn=nn.Identity(),
         )
         self.final = nn.Linear(n_bottleneck_layer, n_cells)
-        self.softmax = nn.Softmax(dim=1)
+        self.activate = nn.Softmax(dim=1)
+        self.is_activate = is_activate
 
     def forward(
         self,
@@ -198,7 +199,8 @@ class DeepCNN(nn.Module):
         x = x.view(x.shape[0], -1)
         x = self.bottleneck(x)
         x = self.final(x)
-        x = self.softmax(x)
+        if self.is_activate == True:
+            x = self.activate(x)
         return x
 
 
