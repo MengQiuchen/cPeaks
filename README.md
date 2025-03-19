@@ -1,4 +1,4 @@
-## cPeaks: A Unified Chromatin Accessibility Reference for scATAC-seq Analysis
+## cPeaks: A Generic Chromatin Accessibility Reference for scATAC-seq Data Analysis
 
 ### Introduction
 cPeaks is a comprehensive chromatin accessibility reference designed to improve scATAC-seq data analysis by providing a standardized set of features. Unlike traditional peak-calling methods that require dataset-specific processing, cPeaks enables direct feature extraction, improving **cell annotation, rare cell type detection, and cross-dataset consistency**.
