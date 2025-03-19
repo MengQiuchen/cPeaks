@@ -25,25 +25,24 @@ We will utilize the two downloaded files in the upcoming tutorials.
 
 #### Detailed data
 
-For additional details, download the cPeaks resource files from the following link: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/6460b32917224d32aef1/?dl=1). The file contains basic information, cPeaks annotation, and integration with biological data. It consists of 15 columns, each providing specific details about the cPeaks:
+For additional details, download the cPeaks resource files from the following link: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/9e887a522dbe4a6e8f05/?dl=1). The file contains basic information, cPeaks annotation, and integration with biological data. It consists of 15 columns, each providing specific details about the cPeaks:
 
 | Column Name | Column Description |
 | ----------- | ------------------ |
-| ID | The ID of this cPeak. We employed a 14-character string as the unique ID for each cPeak. cPeak ID begins with POR for potential open regions, then HS for human, and ends with nine-digital number. For example, the first cPeak was encoded as PORHS000000001. |
-| chr_hg38 | The chromosome of this cPeak in hg38 reference. |
-| source | The source of this cPeak: "observed" or "predicted". |
-| start_hg38 | Start positions of this cPeak in hg38 reference. |
-| end_hg38 | End positions of this cPeak in hg38 reference. |
-| housekeeping | The housekeeping status, whether this cPeak is open in almost all datasets, "TRUE" or "FALSE". |
-| openMode | The open mode of cPeaks, "well-positioned", "one-side", "weakly-positioned", or "else". |
-| inferredElements | The inferred regulatory elements, "CTCF", "TES", "TSS", "Enhancer" or "Promoter". |
-| chr_hg19 | The chromosome of this cPeak in hg19 reference. |
-| start_hg19 | start and end positions of this cPeak in hg19 reference. |
-| end_hg19 | Start and end positions of this cPeak in hg19 reference. |
-| cDHS_ID | The overlapped cDHS ID of this cPeak, names with "chr_start_end" in hg38 reference. |
-| rDHS_ID | The overlapped rDHS ID of this cPeak, names with "chr_start_end" in hg38 reference. |
-| ReMap_ID | The overlapped ReMap ID of this cPeak, names with "chr_start_end" in hg38 reference. |
-| CATLAS_ID | The overlapped CATLAS cCREs of this cPeak, names with "chr_start_end" in hg38 reference. |
+| ID | A unique 14-character string representing each cPeak, starting with “CP”, followed by “HS” (human), and ending with a nine-digit number. For example, the first cPeak is encoded as “CPHS000000001”. |
+| source | Indicates the origin of the cPeak, either “observed” or “predicted”. |
+| chr_hg38 | The chromosome where this cPeak locates in the hg38 reference genome. |
+| start_hg38 | The start position of this cPeak in the hg38 reference genome. |
+| end_hg38 | The end position of this cPeak in the hg38 reference genome. |
+| housekeeping | Specifies whether the cPeak is accessible across nearly all datasets (“TRUE” or “FALSE”). |
+| shape_pattern | The shape pattern of the cPeak, categorized as “well-positioned”, “asymmetrically-positioned”, or “weakly-positioned”. |
+| inferredElements | The inferred regulatory elements associated with the cPeak, such as “CTCF”, “TES”, “TSS”, “Enhancer” or “Promoter”. |
+| chr_hg19 | The chromosome where this cPeak locates in the hg19 reference genome. |
+| start_hg19 | The start position of this cPeak in the hg19 reference genome. |
+| end_hg19 | The end position of this cPeak in the hg19 reference genome. |
+| cDHS_ID | The ID of the overlapped cDHS region in the hg38 reference, formatted as “chr_start_end”. |
+| CATLAS_ID | The ID of the overlapped CATLAS cCREs region in the hg38 reference, formatted as “chr_start_end”. |
+| ReMap_ID | The ID of the overlapped ReMap region in the hg38 reference, formatted as “chr_start_end”. |
 
 ## 2. Quick Start Guide
 
