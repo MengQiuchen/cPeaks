@@ -15,8 +15,8 @@ For a detailed description, see our publication: [Meng Q, Wu X, et al. *bioRxiv*
 
 ### Download
 We provide cPeaks in **.bed format** for two genome versions:
-- [GRCh37/hg19](https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1)
-- [GRCh38/hg38](https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1)
+- [GRCh37/hg19](https://cloud.tsinghua.edu.cn/f/6c252a4922834e6eb489/?dl=1)
+- [GRCh38/hg38](https://cloud.tsinghua.edu.cn/f/6eb530748b324f53bc1f/?dl=1)
 
 Basic information about cPeaks can be found in **[cPeaks_info.tsv](https://cloud.tsinghua.edu.cn/f/9e887a522dbe4a6e8f05/?dl=1)**.
 
