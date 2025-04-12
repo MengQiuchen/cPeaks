@@ -14,11 +14,11 @@ cPeaks serves as a unified reference for different cell types for ATAC-seq or sc
 
 #### Simple data
 
-cPeaks reference files are available at the following links: [hg19 file](https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1). Alternatively, you can download them using the following commands:
+cPeaks reference files are available at the following links: [hg19 file](https://cloud.tsinghua.edu.cn/f/6c252a4922834e6eb489/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/6eb530748b324f53bc1f/?dl=1). Alternatively, you can download them using the following commands:
 
 ```bash
-wget -O YOUR_PATH/cpeaks_hg19.bed https://cloud.tsinghua.edu.cn/f/7b7664158dd7482c9a95/?dl=1
-wget -O YOUR_PATH/cpeaks_hg38.bed https://cloud.tsinghua.edu.cn/f/ff4591857f5d472d9401/?dl=1
+wget -O YOUR_PATH/cpeaks_hg19.bed https://cloud.tsinghua.edu.cn/f/6c252a4922834e6eb489/?dl=1
+wget -O YOUR_PATH/cpeaks_hg38.bed https://cloud.tsinghua.edu.cn/f/6eb530748b324f53bc1f/?dl=1
 ```
 
 We will utilize the two downloaded files in the upcoming tutorials.
