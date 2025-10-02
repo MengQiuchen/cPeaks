@@ -362,6 +362,7 @@ if __name__ == "__main__":
     bed_path = args.bed_path
     reference = args.reference
     output_name = args.output_name
+    print('start')
     
     # fragment_path not end with 'tsv.gz' and not None
     try:
