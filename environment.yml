@@ -1,0 +1,10 @@
+name: cpeaks
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy=2.2.6
+  - pip
+  - pip:
+      - tqdm==4.67.1
