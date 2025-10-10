@@ -1,0 +1,54 @@
+name: Smoke test — map2cpeak
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo (with LFS)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Download weights (if WEIGHTS_URL provided as secret)
+        if: ${{ secrets.WEIGHTS_URL != '' }}
+        run: |
+          mkdir -p tests/weights
+          curl -L -o tests/weights/model.pth "${{ secrets.WEIGHTS_URL }}"
+
+      - name: Run smoke test
+        env:
+          WEIGHTS_URL: ${{ secrets.WEIGHTS_URL }}   # optional; script 会检查
+        run: |
+          chmod +x tests/run_smoke_test.sh
+          ./tests/run_smoke_test.sh
+
+      - name: Upload smoke-test outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-output
+          path: tests/output
+
