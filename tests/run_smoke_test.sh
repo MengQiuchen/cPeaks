@@ -19,7 +19,7 @@ mkdir -p "$OUTDIR"
 ln -sf "$CPEAKS_GZ" ./cpeaks_hg38.bed.gz
 
 # Run with normal mode to reduce memory usage
-python main.py --fragment_path "$FRAG_GZ" --output "$OUTDIR" --mode normal
+python map2cpeaks/main.py --fragment_path "$FRAG_GZ" --output "$OUTDIR" --mode normal
 
 # Basic assertions: default output_name is 'cell-cpeaks' -> check that file
 MTX_FILE="$OUTDIR/cell-cpeaks.mtx"

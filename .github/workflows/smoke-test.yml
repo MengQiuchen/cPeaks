@@ -25,26 +25,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Verify test data present
+        run: |
+          ls -lh tests || true
+          ls -lh tests/data || true
+          file tests/data/toy_fragments.tsv.gz || true
+          file tests/data/cpeaks_hg38.bed.gz || true
+
       - name: Run smoke test
         run: |
-          cd map2cpeak
-          mkdir -p ../tests/output
-          python main.py \
-            --fragment_path ../tests/data/toy_fragments.tsv.gz \
-            --output ../tests/output \
-            --mode normal
+          chmod +x tests/run_smoke_test.sh
+          ./tests/run_smoke_test.sh
 
       - name: Upload smoke-test outputs
         uses: actions/upload-artifact@v4
         with:
           name: smoke-test-output
           path: tests/output
-
-      - name: Verify outputs
-        run: |
-          if [[ ! -f tests/output/cell-cpeaks.mtx ]]; then
-            echo "❌ Smoke test failed: missing cell-cpeaks.mtx"
-            ls -R tests/output
-            exit 1
-          fi
-          echo "✅ Smoke test passed."
