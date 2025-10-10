@@ -10,25 +10,27 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo (with LFS)
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
           lfs: true
 
-      - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          auto-update-conda: true
-          python-version: 3.10
-          environment-file: environment.yml
-          activate-environment: cpeaks
-          use-mamba: true
+          python-version: '3.10'
 
-      - name: Prepare test data (already in repo under tests/data)
+      - name: Install pip dependencies
         run: |
-          ls -R tests || true
-          # ensure the cpeaks gz is available at repo root (main.py expects it)
-          cp tests/data/cpeaks_hg38.bed.gz ./cpeaks_hg38.bed.gz
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify test data present
+        run: |
+          ls -lh tests || true
+          ls -lh tests/data || true
+          file tests/data/toy_fragments.tsv.gz || true
+          file tests/data/cpeaks_hg38.bed.gz || true
 
       - name: Run smoke test
         run: |
