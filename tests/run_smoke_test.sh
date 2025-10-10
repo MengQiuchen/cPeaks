@@ -2,29 +2,36 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-DATA="$ROOT/tests/data/toy_fragments.tsv"
-OUTDIR="$ROOT/tests/output"
-WEIGHTS="$ROOT/tests/weights/model.pth"
+FRAG_GZ="$ROOT/data/toy_fragments.tsv.gz"
+CPEAKS_GZ="$ROOT/data/cpeaks_hg38.bed.gz"
+OUTDIR="$ROOT/output"
 
+echo "ROOT: $ROOT"
+echo "FRAG: $FRAG_GZ"
+echo "CPEAKS: $CPEAKS_GZ"
+echo "OUTDIR: $OUTDIR"
+
+# Ensure output dir
+rm -rf "$OUTDIR"
 mkdir -p "$OUTDIR"
-mkdir -p "$(dirname "$WEIGHTS")"
 
-# 如果需要权重且尚未提交到仓库，可通过环境变量 WEIGHTS_URL 下载（CI 中我们会传）
-if [[ -n "${WEIGHTS_URL:-}" && ! -f "$WEIGHTS" ]]; then
-  echo "Downloading weights from WEIGHTS_URL..."
-  curl -L -o "$WEIGHTS" "$WEIGHTS_URL"
-fi
+# Place cpeaks file at repo root because main.py expects cpeaks_hg38.bed.gz at repo root
+cp "$CPEAKS_GZ" "$ROOT/../cpeaks_hg38.bed.gz" 2>/dev/null || cp "$CPEAKS_GZ" "./cpeaks_hg38.bed.gz"
 
-# --------- 这里替换为你项目中实际调用 map2cpeak 的命令 ---------
-# 举例（请按实际 CLI/参数替换）：
-map2cpeak --fragments "$DATA" --out "$OUTDIR/peaks.bed" --weights "$WEIGHTS"
-# ----------------------------------------------------------------
+# Run the main script (adjust python path if needed)
+python main.py --fragment_path "$FRAG_GZ" --output "$OUTDIR"
 
-# 简单断言：输出文件存在并且非空
-if [[ ! -s "$OUTDIR/peaks.bed" ]]; then
-  echo "Smoke test failed: output file missing or empty" >&2
-  ls -l "$OUTDIR" || true
+# Basic assertions: expect output mtx file (main.py writes <output_name>.mtx inside savepath)
+# default output_name is 'cell-cpeaks' -> file: $OUTDIR/cell-cpeaks.mtx
+MTX_FILE="$OUTDIR/cell-cpeaks.mtx"
+if [[ ! -f "$MTX_FILE" ]]; then
+  echo "Smoke test failed: expected output file not found: $MTX_FILE" >&2
+  ls -R "$OUTDIR" || true
   exit 2
 fi
+if [[ ! -s "$MTX_FILE" ]]; then
+  echo "Smoke test failed: output file is empty: $MTX_FILE" >&2
+  exit 3
+fi
 
-echo "Smoke test passed: $OUTDIR/peaks.bed"
+echo "Smoke test passed. Output: $MTX_FILE"
