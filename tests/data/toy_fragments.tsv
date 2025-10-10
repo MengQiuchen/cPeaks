@@ -1,3 +1,2 @@
-# chrom  start   end     barcode
-chr1    10000   10050   bc1
-chr1    20000   20040   bc2
+chr1	10000	10050	bc1
+chr1	20000	20040	bc2
