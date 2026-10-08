@@ -1,1 +1,2 @@
-data can be downloaded at https://xxxx
+Published cPeaks resource files: https://zenodo.org/records/18321293
+The legacy raw generation inputs are not included in the current public archive.

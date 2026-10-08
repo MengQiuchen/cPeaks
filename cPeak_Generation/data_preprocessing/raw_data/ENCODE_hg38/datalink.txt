@@ -1,1 +1,2 @@
-data can be downloaded at 
+Published cPeaks resource files: https://zenodo.org/records/18321293
+The legacy ENCODE hg38 inputs are not included in the current public archive.

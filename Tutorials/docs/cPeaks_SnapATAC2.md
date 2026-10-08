@@ -7,17 +7,17 @@ import snapatac2 as snap
 fragment_file = snap.datasets.pbmc5k()
 ```
 
-A fragment file refers to a file containing information about the fragments of DNA that are accessible and have been sequenced. Here are more information about the [Fragment File](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/output/fragments).
+A fragment file refers to a file containing information about the fragments of DNA that are accessible and have been sequenced. Here is more information about the [Fragment File](https://www.10xgenomics.com/support/software/cell-ranger-atac/latest/analysis/outputs/fragments-file).
 
-If you do not have a fragment file for your experiment, you can make one from a BAM file, see [pp.make_fragment_file()](https://kzhang.org/SnapATAC2/api/_autosummary/snapatac2.pp.make_fragment_file.html#snapatac2.pp.make_fragment_file).
+If you do not have a fragment file for your experiment, you can make one from a BAM file; see [pp.make_fragment_file()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.make_fragment_file.html).
 
 ##### Preprocessing
 
-We begin data preprocessing by importing fragment files and calculating basic quality control (QC) metrics using the [pp.import_data()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.pp.import_data.html#snapatac2.pp.import_data) function.
+We begin data preprocessing by importing fragment files and calculating basic quality control (QC) metrics using the [pp.import_data()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.import_data.html) function.
 
 This function compresses and stores the fragments in an AnnData object for later usage(To learn more about SnapATAC2's anndata implementation, click [here](https://kzhang.org/epigenomics-analysis/anndata.html)). During this process, various quality control measures, such as TSS enrichment and the number of unique fragments per cell, are computed and stored in the anndata as well.
 
-When the `file` argument is not specified, the AnnData object is created and stored in the computer's memory. However, if the `file` argument is provided, the AnnData object will be backed by an hdf5 file. In "backed" mode, [pp.import_data()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.pp.import_data.html#snapatac2.pp.import_data) processes the data in chunks and streams the results to the disk, using only a small, fixed amount of memory. Therefore, it is recommended to specify the `file` parameter when working with large datasets and limited memory resources. Keep in mind that analyzing data in "backed" mode is slightly slower than in "memory" mode.
+When the `file` argument is not specified, the AnnData object is created and stored in the computer's memory. However, if the `file` argument is provided, the AnnData object will be backed by an hdf5 file. In "backed" mode, [pp.import_data()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.import_data.html) processes the data in chunks and streams the results to the disk, using only a small, fixed amount of memory. Therefore, it is recommended to specify the `file` parameter when working with large datasets and limited memory resources. Keep in mind that analyzing data in "backed" mode is slightly slower than in "memory" mode.
 
 In this tutorial we will use the backed mode. To learn more about the differences between these two modes, click [here](https://kzhang.org/epigenomics-analysis/anndata.html).
 
@@ -30,11 +30,11 @@ data = snap.pp.import_data(
 )
 ```
 
-[pp.import_data()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.pp.import_data.html#snapatac2.pp.import_data) computes only basic QC metrics like the number of unique fragments per cell, fraction of duplicated reads and fraction of mitochondrial read. More advanced metrics can be computed by other functions.
+[pp.import_data()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.import_data.html) computes only basic QC metrics like the number of unique fragments per cell, fraction of duplicated reads and fraction of mitochondrial read. More advanced metrics can be computed by other functions.
 
 Researchers often use TSS enrichment as a quality control metric in these assays. If there is a clear and pronounced enrichment of reads or signal around TSS regions, it suggests that the experiment has captured relevant genomic features and is likely to yield biologically meaningful results. Conversely, a lack of TSS enrichment may indicate issues with the experiment's quality or data processing.
 
-TSSe scores of individual cells can be computed using the [metrics.tsse()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.metrics.tsse.html#snapatac2.metrics.tsse) function.
+TSSe scores of individual cells can be computed using the [metrics.tsse()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.metrics.tsse.html) function.
 
 ```python
 snap.metrics.tsse(data, snap.genome.hg38)
@@ -64,7 +64,7 @@ cpeaks = [peak.split('\t')[0] + ':' + peak.split('\t')[1] + '-' + peak.split('\t
 data = snap.pp.make_peak_matrix(data, use_rep=cpeaks)
 ```
 
-Next, we perform feature selection using [pp.select_features()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.pp.select_features.html#snapatac2.pp.select_features). The result is stored in `data.var['selected']` and will be automatically utilized by relevant functions such as [pp.scrublet()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.pp.scrublet.html#snapatac2.pp.scrublet) and [tl.spectral()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.tl.spectral.html#snapatac2.tl.spectral).
+Next, we perform feature selection using [pp.select_features()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.select_features.html). The result is stored in `data.var['selected']` and will be automatically utilized by relevant functions such as [pp.scrublet()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.scrublet.html) and [tl.spectral()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.tl.spectral.html).
 
 The default feature selection algorithm chooses the most accessible features. The `n_features` parameter determines the number of features or bins used in subsequent analysis steps. Generally, including more features improves resolution and reveals finer details, but it may also introduce noise. To optimize results, experiment with the `n_features` parameter to find the most appropriate value for your specific dataset.
 
@@ -76,7 +76,7 @@ snap.pp.select_features(data)
 
 ###### Doublet removal
 
-Here we apply a customized scrublet algorithm to identify potential doublets. Calling [pp.scrublet()](https://kzhang.org/SnapATAC2/version/2.5/api/_autosummary/snapatac2.pp.scrublet.html#snapatac2.pp.scrublet) will assign probabilites of being doublets to the cells. We can then use `pp.filter_doublets` to get the rid of the doublets.
+Here we apply a customized scrublet algorithm to identify potential doublets. Calling [pp.scrublet()](https://snapatac2.scverse.org/version/2.5/api/_autosummary/snapatac2.pp.scrublet.html) will assign probabilites of being doublets to the cells. We can then use `pp.filter_doublets` to get the rid of the doublets.
 
 ```python
 snap.pp.scrublet(data)

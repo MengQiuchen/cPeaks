@@ -1,4 +1,4 @@
-Compiled date: 23th July 2024
+Last updated: 8 October 2026
 
 Source: [docs/Tutorials.md](https://github.com/MengQiuchen/cPeaks/blob/main/Tutorials/docs/Tutorials.md)
 
@@ -14,18 +14,20 @@ cPeaks serves as a unified reference for different cell types for ATAC-seq or sc
 
 #### Simple data
 
-cPeaks reference files are available at the following links: [hg19 file](https://cloud.tsinghua.edu.cn/f/6c252a4922834e6eb489/?dl=1) and [hg38 file](https://cloud.tsinghua.edu.cn/f/6eb530748b324f53bc1f/?dl=1). Alternatively, you can download them using the following commands:
+cPeaks reference files are available as ZIP archives from Zenodo: [hg19 file](https://zenodo.org/records/18321293/files/cpeaks_hg19_sorted.bed.zip?download=1) and [hg38 file](https://zenodo.org/records/18321293/files/cpeaks_hg38_sorted.bed.zip?download=1). You can download and extract them using the following commands:
 
 ```bash
-wget -O YOUR_PATH/cpeaks_hg19.bed https://cloud.tsinghua.edu.cn/f/6c252a4922834e6eb489/?dl=1
-wget -O YOUR_PATH/cpeaks_hg38.bed https://cloud.tsinghua.edu.cn/f/6eb530748b324f53bc1f/?dl=1
+wget -O YOUR_PATH/cpeaks_hg19_sorted.bed.zip 'https://zenodo.org/records/18321293/files/cpeaks_hg19_sorted.bed.zip?download=1'
+wget -O YOUR_PATH/cpeaks_hg38_sorted.bed.zip 'https://zenodo.org/records/18321293/files/cpeaks_hg38_sorted.bed.zip?download=1'
+unzip -p YOUR_PATH/cpeaks_hg19_sorted.bed.zip cpeaks_hg19_sorted.bed > YOUR_PATH/cpeaks_hg19.bed
+unzip -p YOUR_PATH/cpeaks_hg38_sorted.bed.zip cpeaks_hg38_sorted.bed > YOUR_PATH/cpeaks_hg38.bed
 ```
 
 We will utilize the two downloaded files in the upcoming tutorials.
 
 #### Detailed data
 
-For additional details, download the cPeaks resource files from the following link: [cPeaks resource](https://cloud.tsinghua.edu.cn/f/9e887a522dbe4a6e8f05/?dl=1). The file contains basic information, cPeaks annotation, and integration with biological data. It consists of 15 columns, each providing specific details about the cPeaks:
+For additional details, download [Detailed_cPeaks.tsv.zip](https://drive.google.com/file/d/1R_cY1ourPLEyohG65ZYhrUWOYQXtOPSd/view?usp=drivesdk). The ZIP archive contains the corrected `Detailed_cPeaks.tsv` file with basic information, cPeak annotations, and integration with biological data. It contains 1,657,194 cPeaks and 14 columns (ZIP SHA-256: `9438096b09f4243a3e99f6d3752c8e9bc5788dfa71802208a4c71250169ed120`):
 
 | Column Name | Column Description |
 | ----------- | ------------------ |
@@ -35,7 +37,7 @@ For additional details, download the cPeaks resource files from the following li
 | start_hg38 | The start position of this cPeak in the hg38 reference genome. |
 | end_hg38 | The end position of this cPeak in the hg38 reference genome. |
 | housekeeping | Specifies whether the cPeak is accessible across nearly all datasets (“TRUE” or “FALSE”). |
-| shape_pattern | The shape pattern of the cPeak, categorized as “well-positioned”, “asymmetrically-positioned”, or “weakly-positioned”. |
+| shape pattern | The shape pattern of the cPeak, categorized as “well-positioned”, “asymmetrically-positioned”, or “weakly-positioned”. |
 | inferredElements | The inferred regulatory elements associated with the cPeak, such as “CTCF”, “TES”, “TSS”, “Enhancer” or “Promoter”. |
 | chr_hg19 | The chromosome where this cPeak locates in the hg19 reference genome. |
 | start_hg19 | The start position of this cPeak in the hg19 reference genome. |
@@ -97,12 +99,12 @@ SnapATAC2 requires Python>=3.8. There have been changes in the functions and som
 pip install snapatac2==2.5
 ```
 
-For more installation options, please refer to [SnapATAC2 installation instructions](https://kzhang.org/SnapATAC2/install.html).
+For more installation options, please refer to [SnapATAC2 installation instructions](https://snapatac2.scverse.org/install.html).
 
 
 #### Integrating cPeaks with SnapATAC2
 
-The example codes and descriptions in this section are adapted from [SnapATAC2 standard pipeline](https://kzhang.org/SnapATAC2/tutorials/pbmc.html). You can download the code file here: [cPeaks_SnapATAC2.ipynb](https://github.com/MengQiuchen/cPeaks/blob/main/Tutorials/docs/cPeaks_SnapATAC2.ipynb).
+The example codes and descriptions in this section are adapted from the [SnapATAC2 standard pipeline](https://snapatac2.scverse.org/version/2.5/tutorials/pbmc.html). You can download the code file here: [cPeaks_SnapATAC2.ipynb](https://github.com/MengQiuchen/cPeaks/blob/main/Tutorials/docs/cPeaks_SnapATAC2.ipynb).
 
 [cPeaks_SnapATAC2](docs/cPeaks_SnapATAC2.md ':include')
 
@@ -230,7 +232,7 @@ Remember to pre-adjust your operational environment according to the system requ
 
 [2] Granja, Jeffrey M., et al. "ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis." Nature genetics 53.3 (2021): 403-411.
 
-[3] Meng, Qiuchen, et al. "Toward a generic feature set defined by consensus peaks as a consistent reference for ATAC-seq data." bioRxiv (2023): 2023-05. https://doi.org/10.1101/2023.05.30.542889
+[3] Meng, Qiuchen, et al. "A generic reference defined by consensus peaks for single-cell ATAC-seq data analysis." Nature Communications 17, 2522 (2026). https://doi.org/10.1038/s41467-026-69461-6
 
 ## 5. Contact
-Please reach out to Meng Qiuchen at mqc17@mails.tsinghua.edu.cn if you encounter any issues or have any recommendations.
+Please reach out to Meng Qiuchen at [qiuchenmeng@outlook.com](mailto:qiuchenmeng@outlook.com) if you encounter any issues or have any recommendations.

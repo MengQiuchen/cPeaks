@@ -1,1 +1,3 @@
-data is available at https://cloud.tsinghua.edu.cn/d/bdac1b36bd4d4615acf5/
+# Data availability
+
+The legacy deepCNN training inputs previously hosted on Tsinghua Cloud are not included in the current public archive. Published cPeaks resource files are available in the [Zenodo version 2 record](https://zenodo.org/records/18321293).

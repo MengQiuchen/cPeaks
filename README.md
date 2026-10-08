@@ -9,16 +9,18 @@ cPeaks is a comprehensive chromatin accessibility reference designed to improve 
 - **Superior Performance**: Enhances cell annotation accuracy and rare cell type detection compared to existing feature sets.
 - **Multi-platform Support**: Compatible with SnapATAC2, ArchR, and standalone Python workflows.
 
-For a detailed description, see our publication: [Meng Q, Wu X, et al. *bioRxiv* 2024](https://doi.org/10.1101/2023.05.30.542889).
+For a detailed description, see our publication: [Meng Q, Wu X, et al. *Nature Communications* 2026](https://doi.org/10.1038/s41467-026-69461-6).
 
 ---
 
 ### Download
 We provide cPeaks in **.bed format** for two genome versions:
-- [GRCh37/hg19](https://zenodo.org/records/15666169/files/cpeaks_hg19_sorted.bed.zip?download=1)
-- [GRCh38/hg38](https://zenodo.org/records/15666169/files/cpeaks_hg38_sorted.bed.zip?download=1)
+- [GRCh37/hg19](https://zenodo.org/records/18321293/files/cpeaks_hg19_sorted.bed.zip?download=1)
+- [GRCh38/hg38](https://zenodo.org/records/18321293/files/cpeaks_hg38_sorted.bed.zip?download=1)
 
-Basic information about cPeaks can be found in **[cPeaks_info.tsv](https://cloud.tsinghua.edu.cn/f/9e887a522dbe4a6e8f05/?dl=1)**.
+Detailed information and annotations for all cPeaks are available as a compressed TSV: **[Detailed_cPeaks.tsv.zip](https://drive.google.com/file/d/1R_cY1ourPLEyohG65ZYhrUWOYQXtOPSd/view?usp=drivesdk)**. The archive contains 1,657,194 cPeaks and 14 columns (ZIP SHA-256: `9438096b09f4243a3e99f6d3752c8e9bc5788dfa71802208a4c71250169ed120`).
+
+Additional published cPeaks resources are available in the [Zenodo version 2 record](https://zenodo.org/records/18321293).
 
 ---
 
@@ -68,11 +70,10 @@ For advanced usage, including **integration with custom workflows, tuning parame
 
 ### Citation
 Please cite our work if you use cPeaks in your research:
-**Meng Q, Wu X, et al.** A generic reference defined by consensus peaks for scATAC-seq data analysis. *bioRxiv* (2024). [DOI: 10.1101/2023.05.30.542889](https://doi.org/10.1101/2023.05.30.542889)
+**Meng Q, Wu X, et al.** A generic reference defined by consensus peaks for single-cell ATAC-seq data analysis. *Nature Communications* **17**, 2522 (2026). [DOI: 10.1038/s41467-026-69461-6](https://doi.org/10.1038/s41467-026-69461-6)
 
 ---
 
 ### Contact
 If you encounter any issues or have recommendations, please contact:
 **Meng Qiuchen** at [qiuchenmeng@outlook.com](mailto:qiuchenmeng@outlook.com).
-
