@@ -15,12 +15,12 @@ For a detailed description, see our publication: [Meng Q, Wu X, et al. *Nature C
 
 ### Download
 We provide cPeaks in **.bed format** for two genome versions:
-- [GRCh37/hg19](https://zenodo.org/records/18321293/files/cpeaks_hg19_sorted.bed.zip?download=1)
-- [GRCh38/hg38](https://zenodo.org/records/18321293/files/cpeaks_hg38_sorted.bed.zip?download=1)
+- [GRCh37/hg19](https://zenodo.org/records/23241189/files/cpeaks_hg19_sorted.bed.zip?download=1)
+- [GRCh38/hg38](https://zenodo.org/records/23241189/files/cpeaks_hg38_sorted.bed.zip?download=1)
 
-Detailed information and annotations for all cPeaks are available as a compressed TSV: **[Detailed_cPeaks.tsv.zip](https://drive.google.com/file/d/1R_cY1ourPLEyohG65ZYhrUWOYQXtOPSd/view?usp=drivesdk)**. The archive contains 1,657,194 cPeaks and 14 columns (ZIP SHA-256: `9438096b09f4243a3e99f6d3752c8e9bc5788dfa71802208a4c71250169ed120`).
+Detailed information and annotations for all cPeaks are available as a compressed TSV: **[Detailed_cPeaks.tsv.zip (Zenodo)](https://zenodo.org/records/23241189/files/Detailed_cPeaks.tsv.zip?download=1)** ([Google Drive mirror](https://drive.google.com/file/d/1R_cY1ourPLEyohG65ZYhrUWOYQXtOPSd/view?usp=drivesdk)). The archive contains 1,657,194 cPeaks and 14 columns (ZIP SHA-256: `9438096b09f4243a3e99f6d3752c8e9bc5788dfa71802208a4c71250169ed120`).
 
-Additional published cPeaks resources are available in the [Zenodo version 2 record](https://zenodo.org/records/18321293).
+The corrected detailed annotations, additional published cPeaks resources, and a file guide are available in the [Zenodo version 3 record](https://zenodo.org/records/23241189) ([DOI: 10.5281/zenodo.23241189](https://doi.org/10.5281/zenodo.23241189)). Version 3 replaces the earlier `Information of all cPeaks.tsv.zip` with `Detailed_cPeaks.tsv.zip`; the other data files are unchanged.
 
 ---
 

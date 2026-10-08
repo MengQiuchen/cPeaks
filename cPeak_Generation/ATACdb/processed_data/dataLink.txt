@@ -1,2 +1,2 @@
-Published cPeaks resource files: https://zenodo.org/records/18321293
+Published cPeaks resource files: https://zenodo.org/records/23241189
 The legacy processed ATACdb inputs are not included in the current public archive.

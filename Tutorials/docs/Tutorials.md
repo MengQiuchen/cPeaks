@@ -14,11 +14,11 @@ cPeaks serves as a unified reference for different cell types for ATAC-seq or sc
 
 #### Simple data
 
-cPeaks reference files are available as ZIP archives from Zenodo: [hg19 file](https://zenodo.org/records/18321293/files/cpeaks_hg19_sorted.bed.zip?download=1) and [hg38 file](https://zenodo.org/records/18321293/files/cpeaks_hg38_sorted.bed.zip?download=1). You can download and extract them using the following commands:
+cPeaks reference files are available as ZIP archives from Zenodo: [hg19 file](https://zenodo.org/records/23241189/files/cpeaks_hg19_sorted.bed.zip?download=1) and [hg38 file](https://zenodo.org/records/23241189/files/cpeaks_hg38_sorted.bed.zip?download=1). You can download and extract them using the following commands:
 
 ```bash
-wget -O YOUR_PATH/cpeaks_hg19_sorted.bed.zip 'https://zenodo.org/records/18321293/files/cpeaks_hg19_sorted.bed.zip?download=1'
-wget -O YOUR_PATH/cpeaks_hg38_sorted.bed.zip 'https://zenodo.org/records/18321293/files/cpeaks_hg38_sorted.bed.zip?download=1'
+wget -O YOUR_PATH/cpeaks_hg19_sorted.bed.zip 'https://zenodo.org/records/23241189/files/cpeaks_hg19_sorted.bed.zip?download=1'
+wget -O YOUR_PATH/cpeaks_hg38_sorted.bed.zip 'https://zenodo.org/records/23241189/files/cpeaks_hg38_sorted.bed.zip?download=1'
 unzip -p YOUR_PATH/cpeaks_hg19_sorted.bed.zip cpeaks_hg19_sorted.bed > YOUR_PATH/cpeaks_hg19.bed
 unzip -p YOUR_PATH/cpeaks_hg38_sorted.bed.zip cpeaks_hg38_sorted.bed > YOUR_PATH/cpeaks_hg38.bed
 ```
@@ -27,11 +27,11 @@ We will utilize the two downloaded files in the upcoming tutorials.
 
 #### Detailed data
 
-For additional details, download [Detailed_cPeaks.tsv.zip](https://drive.google.com/file/d/1R_cY1ourPLEyohG65ZYhrUWOYQXtOPSd/view?usp=drivesdk). The ZIP archive contains the corrected `Detailed_cPeaks.tsv` file with basic information, cPeak annotations, and integration with biological data. It contains 1,657,194 cPeaks and 14 columns (ZIP SHA-256: `9438096b09f4243a3e99f6d3752c8e9bc5788dfa71802208a4c71250169ed120`):
+For additional details, download [Detailed_cPeaks.tsv.zip from Zenodo](https://zenodo.org/records/23241189/files/Detailed_cPeaks.tsv.zip?download=1) ([Google Drive mirror](https://drive.google.com/file/d/1R_cY1ourPLEyohG65ZYhrUWOYQXtOPSd/view?usp=drivesdk)). The ZIP archive contains the corrected `Detailed_cPeaks.tsv` file with basic information, cPeak annotations, and integration with biological data. It replaces `Information of all cPeaks.tsv.zip` from earlier Zenodo versions. The [version 3 record](https://zenodo.org/records/23241189) includes a README with file descriptions and checksums. The detailed table contains 1,657,194 cPeaks and 14 columns (ZIP SHA-256: `9438096b09f4243a3e99f6d3752c8e9bc5788dfa71802208a4c71250169ed120`):
 
 | Column Name | Column Description |
 | ----------- | ------------------ |
-| ID | A unique 14-character string representing each cPeak, starting with “CP”, followed by “HS” (human), and ending with a nine-digit number. For example, the first cPeak is encoded as “CPHS000000001”. |
+| ID | A unique cPeak identifier beginning with “CPHS” (human), followed by nine digits. For example, the first cPeak is encoded as “CPHS000000001”. |
 | source | Indicates the origin of the cPeak, either “observed” or “predicted”. |
 | chr_hg38 | The chromosome where this cPeak locates in the hg38 reference genome. |
 | start_hg38 | The start position of this cPeak in the hg38 reference genome. |
